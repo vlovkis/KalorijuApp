@@ -9,6 +9,18 @@ const SignInScreen = () => {
 
     const {height} = useWindowDimensions();
 
+    const onSignInPress = () => {
+        console.warn("Sign in");
+    }
+
+    const onForgotPasswordPress = () => {
+        console.warn("Forgot Password");
+    }
+
+    const onSignUpPress = () => {
+        console.warn("Sign Up")
+    }
+
     return (
         <View style={styles.root}>
             <Image source={Logo}
@@ -21,7 +33,11 @@ const SignInScreen = () => {
              <CustomInput placeholder={"Username"} value={Username} setValue={setUsername}/>
             
              <CustomInput placeholder={"Password"} value={Password} setValue={setPassword} secureTextEntry={true}/>
-             <CustomButton />
+             <CustomButton text="Log in ->" onPress={onSignInPress} />
+
+             <CustomButton text="Forgot Password" onPress={onForgotPasswordPress} type="TERTIARY" />
+
+             <Text style={styles.SignUpText}>Don't have an account?<CustomButton text="Sign Up" onPress={onSignUpPress} type="SIGNUP" /> </Text>
         </View>
     );
 };
@@ -49,6 +65,12 @@ const styles = StyleSheet.create({
         color: '#818181',
         paddingRight: 109,
         marginBottom: 80,
+    },
+    SignUpText:{
+        display: 'flex',
+        alignSelf: 'center',
+
+
     }
 });
 export default SignInScreen
