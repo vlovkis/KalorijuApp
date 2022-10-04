@@ -60,15 +60,18 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         paddingRight: 150,
         marginBottom: 5,
+        paddingLeft: 20,
     },
     SmallText:{
         color: '#818181',
         paddingRight: 109,
         marginBottom: 80,
+        paddingLeft: 20,
     },
     SignUpText:{
         display: 'flex',
         alignSelf: 'center',
+        paddingLeft: 50,
 
 
     }
