@@ -7,8 +7,8 @@ const ConfirmEmail = () => {
     const [code, setCode] = useState('');
     const navigation = useNavigation();
 
-    const onConfirmPress = () => {
-        console.warn("Confirm")
+    const onConfirmNext = () => {
+        navigation.navigate('AdditionalInfo')
     }
     const onSignInPress = () => {
         navigation.navigate('SignIn');
@@ -27,8 +27,8 @@ const ConfirmEmail = () => {
              setValue={setCode}
              />
              <CustomButton
-             text="CONFIRM"
-             onPress={onConfirmPress}
+             text="NEXT"
+             onPress={onConfirmNext}
              />
             <CustomButton  text="Resend code" onPress={onResend} type="SECONDARY" />
             <Text style={styles.SignInText}> Already have an account?<CustomButton text="Sign In" onPress={onSignInPress} type="SIGNUP" /></Text>
