@@ -36,12 +36,14 @@ const SignInScreen = () => {
         <Text style={styles.SmallText}>please sign in to continue</Text>
 
         <CustomInput
+        type="text"
             name="username"
             placeholder={"Username"}
             control={control}
             rules={{required: 'Username is required'}}
             />
         <CustomInput
+        type="text"
             name="password"
             placeholder={"Password"}
             control={control}

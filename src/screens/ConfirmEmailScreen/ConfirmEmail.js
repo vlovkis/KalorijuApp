@@ -3,11 +3,14 @@ import {View, Text, StyleSheet,} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
+import {useForm} from 'react-hook-form';
 const ConfirmEmail = () => {
-    const [code, setCode] = useState('');
+    const {control, handleSubmit} = useForm();
+
     const navigation = useNavigation();
 
-    const onConfirmNext = () => {
+    const onConfirmNext = (data) => {
+        console.warn(data);
         navigation.navigate('AdditionalInfo')
     }
     const onSignInPress = () => {
@@ -23,12 +26,15 @@ const ConfirmEmail = () => {
 
              <CustomInput
              placeholder={"Enter your confirmation code"}
-             value={code}
-             setValue={setCode}
+             name="code"
+             control={control}
+             rules={{
+                required: 'Confirmation code is required'
+             }}
              />
              <CustomButton
              text="NEXT"
-             onPress={onConfirmNext}
+             onPress={handleSubmit(onConfirmNext)}
              />
             <CustomButton  text="Resend code" onPress={onResend} type="SECONDARY" />
             <Text style={styles.SignInText}> Already have an account?<CustomButton text="Sign In" onPress={onSignInPress} type="SIGNUP" /></Text>
