@@ -1,18 +1,21 @@
 import React, {useState} from "react";
-import {View, Text, Image, StyleSheet, useWindowDimensions} from 'react-native';
+import {View, Text, Image, StyleSheet, useWindowDimensions, TextInput, minLength} from 'react-native';
 import Logo from '../../../assets/images/Calorise.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
+import { useForm, Controller } from "react-hook-form";
 const SignInScreen = () => {
-    const [Username, setUsername] = useState('');
-    const [Password, setPassword] = useState('');
+ 
 
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
-    const onSignInPress = () => {
-        //validate user
-        navigation.navigate('Home');
+
+    const {control, handleSubmit,formState: {errors}} = useForm();
+    
+    const onSignInPress = (data) => {
+        console.log(data);
+        //navigation.navigate('Home');
     }
 
     const onForgotPasswordPress = () => {
@@ -29,17 +32,45 @@ const SignInScreen = () => {
             style={[styles.logo, {height: height * 0.3}]}
              resizeMode ="contain" 
              />
-             <Text style={styles.Text}>Login</Text>
-             <Text style={styles.SmallText}>please sign in to continue</Text>
+        <Text style={styles.Text}>Login</Text>
+        <Text style={styles.SmallText}>please sign in to continue</Text>
 
-             <CustomInput placeholder={"Username"} value={Username} setValue={setUsername}/>
+        <CustomInput
+            name="username"
+            placeholder={"Username"}
+            control={control}
+            rules={{required: 'Username is required'}}
+            />
+        <CustomInput
+            name="password"
+            placeholder={"Password"}
+            control={control}
+            secureTextEntry
+            rules={{required: 'Password is required', 
+            minLength: {
+                value: 3,
+                message: 'Password should be more than 3 characters long'
+            }
+        }}
+            />
+             
             
-             <CustomInput placeholder={"Password"} value={Password} setValue={setPassword} secureTextEntry={true}/>
-             <CustomButton text="Log in ->" onPress={onSignInPress} />
+        <CustomButton
+            text="Log in ->"
+            onPress={handleSubmit(onSignInPress)} />
 
-             <CustomButton text="Forgot Password" onPress={onForgotPasswordPress} type="TERTIARY" />
+        <CustomButton 
+            text="Forgot Password"
+            onPress={onForgotPasswordPress}
+            type="TERTIARY" />
 
-             <Text style={styles.SignUpText}>Don't have an account?<CustomButton text="Sign Up" onPress={onSignUpPress} type="SIGNUP" /> </Text>
+             <Text style={styles.SignUpText}>
+                Don't have an account?
+        <CustomButton
+            text="Sign Up" 
+            onPress={onSignUpPress} 
+            type="SIGNUP" /> 
+        </Text>
         </View>
     );
 };
