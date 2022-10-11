@@ -16,6 +16,7 @@ const index = () => {
         <NavigationContainer independent={true}>
             <Tab.Navigator
              screenOptions={({route}) =>({
+                headerShown: false,
                 tabBarIcon: ({focused, size, color}) => {
                     let iconName;
                     if(route.name === 'Home'){

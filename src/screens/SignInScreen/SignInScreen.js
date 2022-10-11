@@ -14,8 +14,8 @@ const SignInScreen = () => {
     const {control, handleSubmit,formState: {errors}} = useForm();
     
     const onSignInPress = (data) => {
-        console.log(data);
-        //navigation.navigate('Home');
+        //console.log(data);
+        navigation.navigate('Home');
     }
 
     const onForgotPasswordPress = () => {
@@ -57,7 +57,7 @@ const SignInScreen = () => {
             
         <CustomButton
             text="Log in ->"
-            onPress={handleSubmit(onSignInPress)} />
+            onPress={onSignInPress} />
 
         <CustomButton 
             text="Forgot Password"
