@@ -37,7 +37,8 @@ const ForgotPassword = () => {
              text="RESET ->"
              onPress={handleSubmit(onConfirmPress)}
              />
-            <Text style={styles.SignInText}> Back to <CustomButton text="Sign In" onPress={onSignInPress} type="SIGNUP" /></Text>
+            <Text style={styles.SignInText}> Back to</Text>
+            <Text style={styles.SignInButton} onPress={onSignInPress}>Sign In</Text>
         </View>
     );
 };
@@ -45,6 +46,7 @@ const ForgotPassword = () => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
+        top: 80,
     },
     Text:{
         fontSize: 50,
@@ -70,11 +72,15 @@ const styles = StyleSheet.create({
     link:{
         color:"#FCA13A",
     },
+    SignInButton:{
+        paddingTop:15,
+        color: "#FCA13A",
+    },
     SignInText:{
-        marginTop: -10,
+        marginTop: 80,
         display: 'flex',
         alignSelf: 'center',
-        paddingLeft: 50,
+        color: '#818181',
     },
     
 });

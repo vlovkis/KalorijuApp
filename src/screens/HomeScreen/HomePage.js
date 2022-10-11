@@ -1,6 +1,8 @@
 import React from "react";
 import {View, Text} from 'react-native';
+import CircularProgress from 'react-native-circular-progress-indicator';
 import { Pedometer } from 'expo-sensors';
+import Ionic from 'react-native-vector-icons/Ionicons';
 
 
 export default class HomePage extends React.Component {
@@ -57,13 +59,26 @@ export default class HomePage extends React.Component {
       this._subscription && this._subscription.remove();
       this._subscription = null;
     };
+    
   
     render() {
       return (
-        <View style={{ alignSelf:'center', top:200}}>
-          <Text style={{ alignSelf:'center', top:200}}>Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}</Text>
-          <Text>Steps taken in the last 24 hours: {this.state.pastStepCount}</Text>
-          <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
+        <View style={{ alignSelf:'center', top:180}}>
+          <Text style={{ alignSelf:'left', bottom:80, fontSize: 40, fontWeight:'bold'}}>HOME</Text>
+          <Text style={{ alignSelf:'center', top:145, fontWeight:'bold' }}>Gained</Text>
+          <Text style={{ alignSelf:'center', top:220, fontWeight:'bold' }}>kcal</Text>
+          <Text style={{ alignSelf:'center', top:235, }}><Ionic name="walk"/>{this.state.pastStepCount} | <Ionic name="flame"/>kcal</Text>
+          <CircularProgress
+                value={64} //CIA BUS IRASOMAS SUNAUDOTAS KALORIJU VALUE
+                radius={150}
+                progressValueColor={'black'}
+                activeStrokeColor={'#f39c12'}
+                inActiveStrokeColor={'#818181'}
+                inActiveStrokeOpacity={0.5}
+                inActiveStrokeWidth={20}
+                activeStrokeWidth={40}
+              />
+              <Text style={{top: 130, fontWeight: 'bold'}}>Current Steps: {this.state.currentStepCount}</Text>
         </View>
       );
     }

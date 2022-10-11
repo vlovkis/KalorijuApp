@@ -5,7 +5,7 @@ const Porfile = () => {
 
     return (
         <View>
-<Text style={{ fontSize: 24, alignSelf:'center'}}>Profiledd page</Text>
+<Text style={{ fontSize: 24, alignSelf:'center', top:100}}>Profile settings</Text>
         </View>
 
     )

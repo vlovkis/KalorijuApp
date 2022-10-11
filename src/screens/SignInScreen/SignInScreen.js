@@ -53,10 +53,8 @@ const SignInScreen = () => {
                 value: 3,
                 message: 'Password should be more than 3 characters long'
             }
-        }}
-            />
+        }}/>
              
-            
         <CustomButton
             text="Log in ->"
             onPress={onSignInPress} />
@@ -66,13 +64,8 @@ const SignInScreen = () => {
             onPress={onForgotPasswordPress}
             type="TERTIARY" />
 
-             <Text style={styles.SignUpText}>
-                Don't have an account?
-        <CustomButton
-            text="Sign Up" 
-            onPress={onSignUpPress} 
-            type="SIGNUP" /> 
-        </Text>
+             <Text style={styles.SignUpText}>Don't have an account?</Text>
+             <Text style={styles.SignUpButton} onPress={onSignUpPress}>Sign Up</Text>
         </View>
     );
 };
@@ -80,6 +73,7 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
+        top: 80,
     },
     logo: {
         width: 500,
@@ -88,7 +82,6 @@ const styles = StyleSheet.create({
         maxHeight: 200,
         marginTop: -50,
         marginBottom: 10,
-    
     },
     Text:{
         fontSize: 50,
@@ -106,9 +99,11 @@ const styles = StyleSheet.create({
     SignUpText:{
         display: 'flex',
         alignSelf: 'center',
-        paddingLeft: 50,
-
-
-    }
+        color: '#818181',
+    },
+    SignUpButton:{
+        paddingTop:15,
+        color: "#FCA13A",
+    },
 });
 export default SignInScreen

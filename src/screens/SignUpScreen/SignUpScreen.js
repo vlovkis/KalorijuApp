@@ -16,10 +16,10 @@ const SignUpScreen = () => {
         navigation.navigate("ConfirmEmail");
     }
     const onTermsOfUsePressed = () => {
-        console.warn("Terms of use")
+        navigation.navigate("Terms")
     }
     const onPrivacyPolicyPressed = () => {
-        console.warn("Privacy Policy")
+        navigation.navigate("Privacy")
     }
     const onSignIn = () => {
         console.warn("Sign In")
@@ -85,8 +85,8 @@ const SignUpScreen = () => {
              text="NEXT ->"
              onPress={handleSubmit(onNextPress)}
              />
-              <Text style={styles.SignInText}> Already have an account?<CustomButton text="Sign In" onPress={onSignIn} type="SIGNUP" /></Text>
-             
+              <Text style={styles.SignInText}> Already have an account?</Text>
+              <Text style={styles.SignInButton} onPress={onSignIn}>Sign In</Text>
 
         </View>
     );
@@ -95,6 +95,7 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
+        top: 80,
     },
     logo: {
         width: 500,
@@ -119,6 +120,10 @@ const styles = StyleSheet.create({
         marginBottom: -30,
         paddingLeft: 25,
     },
+    SignInButton:{
+        paddingTop:15,
+        color: "#FCA13A",
+    },
     title:{
         fontSize: 50,
         fontWeight: "bold",
@@ -130,10 +135,11 @@ const styles = StyleSheet.create({
         color:"#FCA13A",
     },
     SignInText:{
-        marginTop: 10,
+        marginTop: 80,
         display: 'flex',
         alignSelf: 'center',
-        paddingLeft: 50,
+        color: '#818181',
+        
     }
 });
 export default SignUpScreen

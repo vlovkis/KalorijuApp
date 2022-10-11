@@ -2,7 +2,6 @@ import React from "react";
 import {View, Text} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import ConfirmEmailScreen from '../screens/ConfirmEmailScreen';
@@ -10,6 +9,8 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import AdditionalInfoScreen from "../screens/AdditionalInfoScreen";
 import HomeScreen from "../screens/HomeScreen";
+import PrivacyScreen from "../screens/PrivacyScreen";
+import TermsScreen from "../screens/TermsScreen";
 import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,8 @@ const Navigation = () => {
                 <Stack.Screen name="ResetPass" component={ResetPasswordScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="AdditionalInfo" component={AdditionalInfoScreen} />
+                <Stack.Screen name="Privacy" component={PrivacyScreen}/>
+                <Stack.Screen name="Terms" component={TermsScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
