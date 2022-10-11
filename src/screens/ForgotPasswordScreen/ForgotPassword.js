@@ -3,12 +3,13 @@ import {View, Text, StyleSheet,} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
 const ForgotPassword = () => {
-    const [Username, setUsername] = useState('');
+    const {control, handleSubmit} = useForm();
     const navigation = useNavigation();
 
-    const onConfirmPress = () => {
-        //check if user exists
+    const onConfirmPress = (data) => {
+        console.warn(data);
         navigation.navigate("ResetPass");
 
     }
@@ -24,13 +25,17 @@ const ForgotPassword = () => {
              <Text style={styles.title}>Forgot your password</Text>
 
              <CustomInput
+             
+             name="username"
+             control={control}
              placeholder={"Username"}
-             value={Username}
-             setValue={setUsername}
+             rules={{
+                required: 'Username is required'
+             }}
              />
              <CustomButton
              text="RESET ->"
-             onPress={onConfirmPress}
+             onPress={handleSubmit(onConfirmPress)}
              />
             <Text style={styles.SignInText}> Back to <CustomButton text="Sign In" onPress={onSignInPress} type="SIGNUP" /></Text>
         </View>

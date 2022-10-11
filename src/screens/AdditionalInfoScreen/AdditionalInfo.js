@@ -1,15 +1,12 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet,} from 'react-native';
+import {View, Text, StyleSheet, minLength, maxLength} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
+import { useForm } from "react-hook-form";
 
 const AdditionalInfo = () => {
-    const [FullName, setFullName] = useState('');
-    const [DateOfBirth, setDateOfBirth] = useState('');
-    const [Height, setHeight] = useState('');
-    const [Weight, setWeight] = useState('');
-    const [WeightGoal, setWeightGoal] = useState('');
+    const {control, handleSubmit} = useForm();
 
 const navigation = useNavigation();
 
@@ -26,14 +23,82 @@ const onBackPress = () =>{
     <Text style={styles.Text}>Additional Information</Text>
     <Text style={styles.SmallText}>Fill out information to continue.</Text>
             <View style={styles.Inputs}>
-    <CustomInput placeholder={"Full Name"} value={FullName} setValue={setFullName}/>
-    <CustomInput placeholder={"Date Of Birth"} value={DateOfBirth} setValue={setDateOfBirth}/>
-    <CustomInput placeholder={"Height"} value={Height} setValue={setHeight}/>
-    <CustomInput placeholder={"Weight"} value={Weight} setValue={setWeight}/>
-    <CustomInput placeholder={"Weight Goal"} value={WeightGoal} setValue={setWeightGoal}/>
+    <CustomInput 
+    placeholder={"Full Name"} 
+    name="FullName"
+    control={control}
+    rules={{
+        required: 'Full name is required'
+    }}
+    />
+    <CustomInput 
+    name="Birthday"
+    placeholder={"Date Of Birth"}
+    control={control}
+    type="date"
+    rules={{
+        required: 'Date of birth is required',
+    }}
+
+    
+    />
+    <CustomInput
+    name="Height"
+    placeholder={"Height in cm"}
+    control={control}
+    rules={{
+        required: 'Height is required',
+        minLength: {
+            value: 3,
+            message: 'There should be 3 digits'
+        },
+        maxLength: {
+            value: 3,
+            message: 'There should be 3 digits'
+        }
+    }}
+    
+    />
+    <CustomInput
+    name="Weight"
+    placeholder={"Weight in kg"}
+    control={control}
+    rules={{
+        required: "Weight is required",
+        minLength: {
+            value: 2,
+            message: 'There should be at least 2 digits'
+        },
+        maxLength: {
+            value: 3,
+            message: '3 digits max'
+        }
+
+    }}
+    
+    />
+    <CustomInput
+    name="WeightGoal"
+    placeholder={"Weight Goal"}
+    control={control}
+    rules={{
+        required: "Weight goal is required",
+        minLength: {
+            value: 2,
+            message: 'There should be at least 2 digits'
+        },
+        
+        maxLength: {
+            value: 3,
+            message: '3 digits max'
+        },
+
+    }}
+    
+    />
             </View>
             <View style={styles.ButtonPlacement}>
-            <CustomButton text="Finish" onPress={onFinishPress} />
+            <CustomButton text="Finish" onPress={handleSubmit(onFinishPress)} />
             <CustomButton text="Back" onPress={onBackPress} type="SECONDARY"/>
             </View>
         </View>

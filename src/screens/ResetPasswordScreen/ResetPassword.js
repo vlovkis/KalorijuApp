@@ -3,13 +3,17 @@ import {View, Text, StyleSheet,} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
-const ResetPassword = () => {
-    const [code, setCode] = useState('');
-    const [newPassword, setNewPassword] = useState('');
+import { useForm } from "react-hook-form";
+
+
+const ResetPassword = (data) => {
+    const {control, handleSubmit} = useForm();
+    console.warn(data);
     const navigation = useNavigation();
 
     const onConfirmPress = () => {
         console.warn("Confirm")
+    
     }
     const onSignInPress = () => {
         navigation.navigate("SignIn");
@@ -23,20 +27,32 @@ const ResetPassword = () => {
              <Text style={styles.title}>Reset your password</Text>
 
              <CustomInput
+             name="code"
+             control={control}
              placeholder={"Code"}
-             value={code}
-             setValue={setCode}
+             rules={{
+                required: 'Code is required'
+             }}
+             
              />
                <CustomInput
+               name="password"
+               control={control}
              placeholder={"Enter your new password"}
-             value={newPassword}
-             setValue={setNewPassword}
+             secureTextEntry
+             rules={{required: 'Password is required',
+             minLength: {
+                 value: 7,
+                 message: 'Password should be at least 7 characters long',
+             },
+             }}
+             
              />
              <CustomButton
              text="Submit ->"
              onPress={onConfirmPress}
              />
-            <Text style={styles.SignInText}> Back to <CustomButton text="Sign In" onPress={onSignInPress} type="SIGNUP" /></Text>
+            <Text style={styles.SignInText}> Back to <CustomButton text="Sign In" onPress={handleSubmit(onSignInPress)} type="SIGNUP" /></Text>
              
 
         </View>
