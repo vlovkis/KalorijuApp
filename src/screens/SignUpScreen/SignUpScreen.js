@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, minLength, maxLength} from 'react-native';
+import {View, Text, StyleSheet, minLength, maxLength, Alert} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
+import {Auth} from 'aws-amplify';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -11,9 +12,20 @@ const SignUpScreen = () => {
   const {control, handleSubmit, watch} = useForm();
   const pwd = watch('password');
     const navigation = useNavigation();
-    const onNextPress = () => {
-        console.warn("Next")
-        navigation.navigate("ConfirmEmail");
+    
+    const onNextPress = async(data) => {
+        const {username, password, email, name} = data;
+        try {
+            const response = await Auth.signUp({
+                username,
+                password,
+                attributes: {email, name, preferred_username: username},
+            });
+            navigation.navigate("ConfirmEmail", {username});
+        } catch (e){
+            Alert.alert('Oops', e.message);
+        }
+        
     }
     const onTermsOfUsePressed = () => {
         navigation.navigate("Terms")
@@ -30,7 +42,21 @@ const SignUpScreen = () => {
         <View style={styles.root}>
         
              <Text style={styles.title}>Create an account</Text>
-
+             <CustomInput
+             name="name"
+             control={control}
+             placeholder={"Name"}
+             rules={{required: 'Name is required',
+            minLength: {
+                value: 3,
+                message: 'Name should be at least 3 characters long',
+            },
+            maxLength: {
+                value: 24,
+                message: 'Name should be max 24 characters long',
+            },
+            }}
+             />
              <CustomInput
              name="username"
              control={control}

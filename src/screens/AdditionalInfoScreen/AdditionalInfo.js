@@ -1,11 +1,22 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, minLength, maxLength} from 'react-native';
+import {View, Text, StyleSheet, minLength, maxLength, Alert} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { useForm } from "react-hook-form";
+import { Auth } from 'aws-amplify';
 
-const AdditionalInfo = () => {
+
+const AdditionalInfo = async data => {
+    const {FullName, Age, Height, Weight, WeightGoal} = data;
+    try {
+        const response = await Auth.Credentials({
+            FullName, Age, Height, Weight, WeightGoal
+        });
+        navigation.navigate("SignIn", {username});
+    } catch (e){
+        Alert.alert('Oops', e.message);
+    }
     const {control, handleSubmit} = useForm();
 
 const navigation = useNavigation();
@@ -32,12 +43,11 @@ const onBackPress = () =>{
     }}
     />
     <CustomInput 
-    name="Birthday"
-    placeholder={"Date Of Birth"}
+    name="Age"
+    placeholder={"Age"}
     control={control}
-    type="date"
     rules={{
-        required: 'Date of birth is required',
+        required: 'Age is required',
     }}
 
     

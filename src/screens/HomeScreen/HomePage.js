@@ -64,7 +64,7 @@ export default class HomePage extends React.Component {
     render() {
       return (
         <View style={{ alignSelf:'center', top:180}}>
-          <Text style={{ alignSelf:'left', bottom:80, fontSize: 40, fontWeight:'bold'}}>HOME</Text>
+          <Text style={{ alignSelf:'center', bottom:80, fontSize: 40, fontWeight:'bold'}}>HOME</Text>
           <Text style={{ alignSelf:'center', top:145, fontWeight:'bold' }}>Gained</Text>
           <Text style={{ alignSelf:'center', top:220, fontWeight:'bold' }}>kcal</Text>
           <Text style={{ alignSelf:'center', top:235, }}><Ionic name="walk"/>{this.state.pastStepCount} | <Ionic name="flame"/>kcal</Text>

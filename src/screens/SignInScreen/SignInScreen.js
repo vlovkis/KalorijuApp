@@ -1,21 +1,34 @@
 import React, {useState} from "react";
-import {View, Text, Image, StyleSheet, useWindowDimensions, TextInput, minLength} from 'react-native';
+import {View, Text, Image, StyleSheet, useWindowDimensions, TextInput, minLength, Alert} from 'react-native';
 import Logo from '../../../assets/images/Calorise.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
+import { Auth } from "aws-amplify";
 const SignInScreen = () => {
- 
+    
 
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
-
+    const [loading, setLoading] = useState(false);
     const {control, handleSubmit,formState: {errors}} = useForm();
     
-    const onSignInPress = (data) => {
-        //console.log(data);
-        navigation.navigate('Home');
+    const onSignInPress = async (data) => {
+        if (loading){
+            return;
+        }
+
+        setLoading(true);
+       try {
+        const response = await Auth.signIn(data.username, data.password);
+        navigation.navigate('HomeScreen');
+       }
+       catch(e){
+        Alert.alert('Oops', e.message);
+       }
+    
+       setLoading(false);
     }
 
     const onForgotPasswordPress = () => {
@@ -56,8 +69,8 @@ const SignInScreen = () => {
         }}/>
              
         <CustomButton
-            text="Log in ->"
-            onPress={onSignInPress} />
+            text={loading ? "Loading..." : "Log in ->"}
+            onPress={handleSubmit(onSignInPress)} />
 
         <CustomButton 
             text="Forgot Password"
@@ -106,4 +119,4 @@ const styles = StyleSheet.create({
         color: "#FCA13A",
     },
 });
-export default SignInScreen
+export default SignInScreen;

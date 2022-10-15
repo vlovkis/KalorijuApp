@@ -1,30 +1,40 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet,} from 'react-native';
+import {View, Text, StyleSheet, Alert,} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
+import {Auth} from 'aws-amplify';
 
 
-const ResetPassword = (data) => {
+const ResetPassword = () => {
     const {control, handleSubmit} = useForm();
-    console.warn(data);
+   
     const navigation = useNavigation();
 
-    const onConfirmPress = () => {
-        console.warn("Confirm")
+    const onConfirmPress = async data => {
+        try{
+            await Auth.forgotPasswordSubmit(data.username, data.code, data.password);
+            navigation.navigate('SignIn');
+        } catch (e) {
+            Alert.alert('Oops', e.message);
+        }
+    };
     
-    }
     const onSignInPress = () => {
         navigation.navigate("SignIn");
-    }
-    const onResend = () => {
-        console.warn("Resend")
-    }
+    };
     return (
         <View style={styles.root}>
         
              <Text style={styles.title}>Reset your password</Text>
+             
+             <CustomInput
+                name="username"
+                placeholder="Username"
+                control={control}
+                rules={{required: 'Username is required'}}
+                />
 
              <CustomInput
              name="code"
@@ -38,10 +48,10 @@ const ResetPassword = (data) => {
                <CustomInput
                name="password"
                control={control}
-             placeholder={"Enter your new password"}
-             secureTextEntry
-             rules={{required: 'Password is required',
-             minLength: {
+                placeholder={"Enter your new password"}
+                secureTextEntry
+                rules={{required: 'Password is required',
+                minLength: {
                  value: 7,
                  message: 'Password should be at least 7 characters long',
              },
@@ -50,7 +60,7 @@ const ResetPassword = (data) => {
              />
              <CustomButton
              text="Submit ->"
-             onPress={onConfirmPress}
+             onPress={handleSubmit(onConfirmPress)}
              />
             <Text style={styles.SignInText}> Back to <CustomButton text="Sign In" onPress={handleSubmit(onSignInPress)} type="SIGNUP" /></Text>
              
@@ -95,4 +105,4 @@ const styles = StyleSheet.create({
     },
     
 });
-export default ResetPassword
+export default ResetPassword;
