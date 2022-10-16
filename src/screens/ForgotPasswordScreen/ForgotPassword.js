@@ -1,18 +1,22 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet,} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
+import {Auth} from 'aws-amplify';
 const ForgotPassword = () => {
     const {control, handleSubmit} = useForm();
     const navigation = useNavigation();
 
-    const onConfirmPress = (data) => {
-        console.warn(data);
-        navigation.navigate("ResetPass");
-
-    }
+    const onConfirmPress = async data => {
+        try{
+            await Auth.forgotPassword(data.username);
+            navigation.navigate("ResetPass");
+        } catch (e) {
+            Alert.alert('Oops', e.message);
+        }
+    };
     const onSignInPress = () => {
         navigation.navigate("SignIn");
     }

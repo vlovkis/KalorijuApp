@@ -8,7 +8,13 @@ import ForgotPasswordScreen from '../src/screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../src/screens/ResetPasswordScreen';
 import Navigation from '../src/Navigation';
 import 'react-native-gesture-handler';
-export default function App() {
+import Amplify from 'aws-amplify';
+
+import awsconfig from '../src/aws-exports';
+
+Amplify.configure(awsconfig);
+const App = () => {
+  //Auth.signOut();
   return (
     //<View style={styles.container}>
       <Navigation style={styles.container}/>
@@ -29,3 +35,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;

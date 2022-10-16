@@ -1,29 +1,52 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet,} from 'react-native';
+import {View, Text, StyleSheet, Alert,} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
 import {useForm} from 'react-hook-form';
+import { useRoute } from "@react-navigation/native";
+import {Auth} from 'aws-amplify';
 const ConfirmEmail = () => {
-    const {control, handleSubmit} = useForm();
+    const route = useRoute();
+    const {control, handleSubmit, watch} = useForm({
+        defaultValues: {username: route?.params?.username}
+    });
+    const username = watch('username');
 
     const navigation = useNavigation();
 
-    const onConfirmNext = (data) => {
-        console.warn(data);
-        navigation.navigate('AdditionalInfo')
-    }
+    const onConfirmNext = async data => {
+        try{
+        const response = await Auth.confirmSignUp(data.username, data.code);
+        navigation.navigate('AdditionalInfo');
+        } catch (e){
+            Alert.alert("Oops", e.message);
+        }
+        
+    };
     const onSignInPress = () => {
         navigation.navigate('SignIn');
     }
-    const onResend = () => {
-        console.warn("Resend")
-    }
+    const onResend = async () => {
+        try {
+            await Auth.resendSignUp(username);
+            Alert.alert('Success', 'Code was resent to your email');
+        } catch (e) {
+            Alert.alert('Oops', e.message);
+        }
+    };
     return (
         <View style={styles.root}>
         
              <Text style={styles.title}>Confirm Email</Text>
-
+             <CustomInput
+             placeholder={"Username"}
+             name="username"
+             control={control}
+             rules={{
+                required: 'Username is required'
+             }}
+             />
              <CustomInput
              placeholder={"Enter your confirmation code"}
              name="code"

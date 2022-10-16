@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-calorise-staging-121052-authRole",
+      "UnauthRoleArn": "arn:aws:iam::243059633885:role/amplify-calorise-staging-121052-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::243059633885:role/amplify-calorise-staging-121052-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-calorise-staging-121052-deployment",
+      "UnauthRoleName": "amplify-calorise-staging-121052-unauthRole",
+      "StackName": "amplify-calorise-staging-121052",
+      "StackId": "arn:aws:cloudformation:eu-north-1:243059633885:stack/amplify-calorise-staging-121052/69ed4410-4c82-11ed-83e3-065debf00110",
+      "AmplifyAppId": "d28d1xwm73em80"
+    },
+    "categories": {
+      "auth": {
+        "Calorise": {}
+      }
+    }
+  }
+}
