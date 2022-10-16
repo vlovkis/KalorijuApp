@@ -10,7 +10,7 @@ import Navigation from '../src/Navigation';
 import 'react-native-gesture-handler';
 import Amplify from 'aws-amplify';
 
-import awsconfig from '../src/aws-exports';
+import awsconfig from '../aws-exports';
 
 Amplify.configure(awsconfig);
 const App = () => {
