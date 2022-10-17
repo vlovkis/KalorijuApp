@@ -1,0 +1,10 @@
+{
+  "resourceName": "infoTable",
+  "tableName": "infoTable",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

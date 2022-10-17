@@ -1,23 +1,42 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, minLength, maxLength, Alert} from 'react-native';
+import {View, Text, StyleSheet, minLength, maxLength, Alert, TextInput} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { useForm } from "react-hook-form";
 import { Auth } from 'aws-amplify';
 
+import Amplify from 'aws-amplify';
+import { API } from 'aws-amplify';
+import awsExports  from '../../../aws-exports';
+Amplify.configure(awsExports);
 
-const AdditionalInfo = async data => {
-    const {FullName, Age, Height, Weight, WeightGoal} = data;
-    try {
-        const response = await Auth.Credentials({
-            FullName, Age, Height, Weight, WeightGoal
-        });
-        navigation.navigate("SignIn", {username});
-    } catch (e){
-        Alert.alert('Oops', e.message);
+
+const AdditionalInfo = () => {
+    try{
+    
+    async function AddInfo() {
+        const data = {
+            body: {
+                fullName: formState.fullName,
+                age: formState.age,
+                height: formState.height,
+                weight: formState.weight,
+                weightGoal: formState.weightGoal,
+
+            }
+        };
+
+        const apiData = await API.post('tableMap', '/table', data);
+        alert('Information added!');
     }
-    const {control, handleSubmit} = useForm();
+
+    const formState = {age: '', fullName: '', height: '', weight: '', weightGoal: ''};
+
+    function updateFormState(key, value){
+        formState[key] = value;
+    }
+}catch (err){ console.log(err)}
 
 const navigation = useNavigation();
 
@@ -34,82 +53,12 @@ const onBackPress = () =>{
     <Text style={styles.Text}>Additional Information</Text>
     <Text style={styles.SmallText}>Fill out information to continue.</Text>
             <View style={styles.Inputs}>
-    <CustomInput 
-    placeholder={"Full Name"} 
-    name="FullName"
-    control={control}
-    rules={{
-        required: 'Full name is required'
-    }}
-    />
-    <CustomInput 
-    name="Age"
-    placeholder={"Age"}
-    control={control}
-    rules={{
-        required: 'Age is required',
-    }}
-
-    
-    />
-    <CustomInput
-    name="Height"
-    placeholder={"Height in cm"}
-    control={control}
-    rules={{
-        required: 'Height is required',
-        minLength: {
-            value: 3,
-            message: 'There should be 3 digits'
-        },
-        maxLength: {
-            value: 3,
-            message: 'There should be 3 digits'
-        }
-    }}
-    
-    />
-    <CustomInput
-    name="Weight"
-    placeholder={"Weight in kg"}
-    control={control}
-    rules={{
-        required: "Weight is required",
-        minLength: {
-            value: 2,
-            message: 'There should be at least 2 digits'
-        },
-        maxLength: {
-            value: 3,
-            message: '3 digits max'
-        }
-
-    }}
-    
-    />
-    <CustomInput
-    name="WeightGoal"
-    placeholder={"Weight Goal"}
-    control={control}
-    rules={{
-        required: "Weight goal is required",
-        minLength: {
-            value: 2,
-            message: 'There should be at least 2 digits'
-        },
-        
-        maxLength: {
-            value: 3,
-            message: '3 digits max'
-        },
-
-    }}
-    
-    />
-            </View>
-            <View style={styles.ButtonPlacement}>
-            <CustomButton text="Finish" onPress={handleSubmit(onFinishPress)} />
-            <CustomButton text="Back" onPress={onBackPress} type="SECONDARY"/>
+                <TextInput style={styles.Input} placeholder="First Name and Last Name" onChange={e => updateFormState('fullName', e.target)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={2} placeholder="Age" onChange={e => updateFormState('age', e.target.valueOf)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" onChange={e => updateFormState('weight', e.target.valueOf)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" onChange={e => updateFormState('height', e.target.valueOf)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)" onChange={e => updateFormState('weightGoal', e.target.valueOf)}/>
+                <CustomButton onPress={AddInfo} text="Add Information"/>
             </View>
         </View>
     )
@@ -140,5 +89,17 @@ const styles = StyleSheet.create({
         top: 130,
         left:5,
     },
+    Input:{
+        height: 40,
+        backgroundColor: '#fff',
+        marginHorizontal: 7,
+        marginVertical: 5,
+        padding: 5,
+        width: 250,
+        borderRadius: 10,
+    },
+    InputLabel:{
+        left: 10,
+    }
 });
 export default AdditionalInfo
