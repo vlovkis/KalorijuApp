@@ -54,7 +54,7 @@ const Navigation = () => {
         <NavigationContainer independent={true}>
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 {user ? (
-                    <Stack.Screen name="HomePage" component={HomeScreen} />
+                    <Stack.Screen name="Home" component={HomeScreen} />
                 ) : (
                 <>
                 

@@ -28,32 +28,51 @@ app.use(function(req, res, next) {
   next()
 });
 
-const AWS = require('aws-sdk')
-const docClient = new AWS.DynamoDB.DocumentClient();
+/**********************
+ * Example get method *
+ **********************/
 
-function id() {
-  return Math.random().toString(36).substring(2) + Date.now().toString(36);
-}
+app.get('/table', function(req, res) {
+  // Add your code here
+  res.json({success: 'get call succeed!', url: req.url});
+});
+
+app.get('/table/*', function(req, res) {
+  // Add your code here
+  res.json({success: 'get call succeed!', url: req.url});
+});
+
+/****************************
+* Example post method *
+****************************/
 
 app.post('/table', function(req, res) {
-  
+  // Add your code here
+  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+});
 
-  var params = {
-    TableName: "infoTable",
-    Item: {
-      id: id(),
-      fullName: req.body.fullName,
-      age: req.body.age,
-      weight: req.body.weight,
-      weightGoal: req.body.weightGoal,
-      height: req.body.height
-    }
-  }
-  docClient.put(params, function(err, data) {
-    if (err) res.json({ err })
-    else res.json({ success: 'Info added successfully!'})
-  })
-})
+app.post('/table/*', function(req, res) {
+  // Add your code here
+  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+});
+
+/****************************
+* Example put method *
+****************************/
+
+app.put('/table', function(req, res) {
+  // Add your code here
+  res.json({success: 'put call succeed!', url: req.url, body: req.body})
+});
+
+app.put('/table/*', function(req, res) {
+  // Add your code here
+  res.json({success: 'put call succeed!', url: req.url, body: req.body})
+});
+
+/****************************
+* Example delete method *
+****************************/
 
 app.delete('/table', function(req, res) {
   // Add your code here

@@ -1,47 +1,35 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, minLength, maxLength, Alert, TextInput} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
-import { useForm } from "react-hook-form";
-import { Auth } from 'aws-amplify';
-
-import Amplify from 'aws-amplify';
-import { API } from 'aws-amplify';
-import awsExports  from '../../../aws-exports';
-Amplify.configure(awsExports);
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const AdditionalInfo = () => {
-    try{
-    
-    async function AddInfo() {
-        const data = {
-            body: {
-                fullName: formState.fullName,
-                age: formState.age,
-                height: formState.height,
-                weight: formState.weight,
-                weightGoal: formState.weightGoal,
+    const [ageInputValue, setAgeInputValue] = React.useState('');
+    const [weightInputValue, setWeightInputValue] = React.useState('');
+    const [weightGoalInputValue, setWeightGoalInputValue] = React.useState('');
+    const [heightInputValue, setHeightInputValue] = React.useState('');
+    const [fullNameInputValue, setFullNameInputValue] = React.useState('');
 
-            }
-        };
+    saveToAsync = async () => {
+        try {
+          await AsyncStorage.setItem("@age", ageInputValue);
+          await AsyncStorage.setItem("@weight", weightInputValue);
+          await AsyncStorage.setItem("@weightG", weightGoalInputValue);
+          await AsyncStorage.setItem("@height", heightInputValue);
+          await AsyncStorage.setItem("@fullN", fullNameInputValue);
+          alert("Information saved");
+        } catch (error) {
+          // Error saving data
+        }
+      };
 
-        const apiData = await API.post('tableMap', '/table', data);
-        alert('Information added!');
-    }
-
-    const formState = {age: '', fullName: '', height: '', weight: '', weightGoal: ''};
-
-    function updateFormState(key, value){
-        formState[key] = value;
-    }
-}catch (err){ console.log(err)}
-
+   
 const navigation = useNavigation();
 
 const onFinishPress = () =>{
-    navigation.navigate("Home");
+    navigation.navigate("Sign");
 }
 
 const onBackPress = () =>{
@@ -53,12 +41,17 @@ const onBackPress = () =>{
     <Text style={styles.Text}>Additional Information</Text>
     <Text style={styles.SmallText}>Fill out information to continue.</Text>
             <View style={styles.Inputs}>
-                <TextInput style={styles.Input} placeholder="First Name and Last Name" onChange={e => updateFormState('fullName', e.target)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={2} placeholder="Age" onChange={e => updateFormState('age', e.target.valueOf)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" onChange={e => updateFormState('weight', e.target.valueOf)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" onChange={e => updateFormState('height', e.target.valueOf)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)" onChange={e => updateFormState('weightGoal', e.target.valueOf)}/>
-                <CustomButton onPress={AddInfo} text="Add Information"/>
+                <TextInput style={styles.Input} placeholder="First Name and Last Name" onChangeText={(text) => setFullNameInputValue(text)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={2} placeholder="Age" onChangeText={(text) => setAgeInputValue(text)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" onChangeText={(text) => setWeightInputValue(text)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" onChangeText={(text) => setHeightInputValue(text)}/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)" onChangeText={(text) => setWeightGoalInputValue(text)}/>
+                <TouchableOpacity onPress={() => this.saveToAsync()}>
+                    <Text>Save</Text>
+                </TouchableOpacity>
+                <CustomButton onPress={onFinishPress}>
+                    <Text>Home</Text>
+                </CustomButton>
             </View>
         </View>
     )
