@@ -1,35 +1,36 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Alert} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
+import { useRoute } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {Auth} from 'aws-amplify'
+
 
 
 const AdditionalInfo = () => {
-    const [ageInputValue, setAgeInputValue] = React.useState('');
-    const [weightInputValue, setWeightInputValue] = React.useState('');
-    const [weightGoalInputValue, setWeightGoalInputValue] = React.useState('');
-    const [heightInputValue, setHeightInputValue] = React.useState('');
-    const [fullNameInputValue, setFullNameInputValue] = React.useState('');
+    const route = useRoute();
+    const {control, handleSubmit, watch} = useForm({
+        defaultValues: {username: route?.params?.username,
+                        password: route?.params?.password,
+                    }
+                   
+    });
 
-    saveToAsync = async () => {
-        try {
-          await AsyncStorage.setItem("@age", ageInputValue);
-          await AsyncStorage.setItem("@weight", weightInputValue);
-          await AsyncStorage.setItem("@weightG", weightGoalInputValue);
-          await AsyncStorage.setItem("@height", heightInputValue);
-          await AsyncStorage.setItem("@fullN", fullNameInputValue);
-          alert("Information saved");
-        } catch (error) {
-          // Error saving data
-        }
-      };
-
-   
 const navigation = useNavigation();
 
-const onFinishPress = () =>{
-    navigation.navigate("Sign");
+const onFinishPress = async(data) =>{
+    const {username, password, email, Age, Weight, fullname, Height, WeightGoal }  = data;
+        try {
+            const response = await Auth.signUp({
+                username,
+                password,
+                attributes: {email, fullname, preferred_username: username, Age, Weight, Height, WeightGoal},
+            });
+            navigation.navigate("ConfirmEmail", {username});
+        } catch (e){
+            Alert.alert('Oops', e.message);
+        }    
 }
 
 const onBackPress = () =>{
@@ -41,15 +42,42 @@ const onBackPress = () =>{
     <Text style={styles.Text}>Additional Information</Text>
     <Text style={styles.SmallText}>Fill out information to continue.</Text>
             <View style={styles.Inputs}>
-                <TextInput style={styles.Input} placeholder="First Name and Last Name" onChangeText={(text) => setFullNameInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={2} placeholder="Age" onChangeText={(text) => setAgeInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" onChangeText={(text) => setWeightInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" onChangeText={(text) => setHeightInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)" onChangeText={(text) => setWeightGoalInputValue(text)}/>
-                <TouchableOpacity onPress={() => this.saveToAsync()}>
-                    <Text>Save</Text>
-                </TouchableOpacity>
-                <CustomButton onPress={onFinishPress}>
+                
+                <TextInput style={styles.Input}
+                control={control}
+                name="fullname"
+                placeholder="First Name and Last Name"
+                rules={{
+            minLength: {
+                value: 3,
+                message: 'Name should be at least 3 characters long',
+            },
+            maxLength: {
+                value: 24,
+                message: 'Name should be max 24 characters long',
+            },
+            }}
+            />
+                <TextInput style={styles.Input} 
+                keyboardType='numeric' 
+                maxLength={2}
+                name="Age"
+                placeholder="Age"
+                rules={{
+                    minLength: {
+                        value: 1,
+                        message: 'Wrong age',
+                    },
+                    maxLength: {
+                        value: 3,
+                        message: 'Wrong age',
+                    },
+                    }}
+                />
+                <TextInput style={styles.Input} name="Weight" keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" />
+                <TextInput style={styles.Input} name="Height" keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" />
+                <TextInput style={styles.Input} name= "WeightGoal" keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)"/>
+                <CustomButton onPress={handleSubmit(onFinishPress)}>
                     <Text>Home</Text>
                 </CustomButton>
             </View>

@@ -28,6 +28,34 @@ app.use(function(req, res, next) {
   next()
 });
 
+const AWS = require('aws-sdk')
+const docClient = new AWS.DynamoDB.DocumentClient();
+
+function id() {
+  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
+app.post('/table', function(req, res) {
+  
+
+  var params = {
+    TableName: process.env.STORAGE_INFOTABLE_NAME,
+    Item: {
+      id: id(),
+      fullName: req.body.fullName,
+      age: req.body.age,
+      weight: req.body.weight,
+      weightGoal: req.body.weightGoal,
+      height: req.body.height
+    }
+  }
+  docClient.put(params, function(err, data) {
+    if (err) res.json({ err })
+    else res.json({ success: 'Info added successfully!'})
+  })
+})
+
+
 /**********************
  * Example get method *
  **********************/
