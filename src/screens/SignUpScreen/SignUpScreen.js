@@ -16,7 +16,7 @@ const SignUpScreen = () => {
     const onNextPress = async(data) => {
         const {username, password, email, name} = data;
         try {
-            navigation.navigate("AdditionalInfo", {name, username, password});
+            navigation.navigate("AdditionalInfo", {name, username, password, email});
         } catch (e){
             Alert.alert('Oops', e.message);
         }

@@ -13,6 +13,8 @@ const AdditionalInfo = () => {
     const {control, handleSubmit, watch} = useForm({
         defaultValues: {username: route?.params?.username,
                         password: route?.params?.password,
+                        email: route?.params?.email,
+                        age: route?.params?.age,
                     }
                    
     });
@@ -20,12 +22,12 @@ const AdditionalInfo = () => {
 const navigation = useNavigation();
 
 const onFinishPress = async(data) =>{
-    const {username, password, email, Age, Weight, fullname, Height, WeightGoal }  = data;
+    const {username, password, email, age, weight, fullname, height, weightGoal, name }  = data;
         try {
             const response = await Auth.signUp({
                 username,
                 password,
-                attributes: {email, fullname, preferred_username: username, Age, Weight, Height, WeightGoal},
+                attributes: {email, 'custom:fullname': fullname, preferred_username: username, 'custom:Age': age, 'custom:Weight': weight, 'custom:Height': height, 'custom:WeightGoal': weightGoal, name},
             });
             navigation.navigate("ConfirmEmail", {username});
         } catch (e){
@@ -45,7 +47,7 @@ const onBackPress = () =>{
                 
                 <TextInput style={styles.Input}
                 control={control}
-                name="fullname"
+                name="fullName"
                 placeholder="First Name and Last Name"
                 rules={{
             minLength: {
@@ -61,7 +63,7 @@ const onBackPress = () =>{
                 <TextInput style={styles.Input} 
                 keyboardType='numeric' 
                 maxLength={2}
-                name="Age"
+                name="age"
                 placeholder="Age"
                 rules={{
                     minLength: {
@@ -74,9 +76,9 @@ const onBackPress = () =>{
                     },
                     }}
                 />
-                <TextInput style={styles.Input} name="Weight" keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" />
-                <TextInput style={styles.Input} name="Height" keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" />
-                <TextInput style={styles.Input} name= "WeightGoal" keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)"/>
+                <TextInput style={styles.Input} name="weight" keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" />
+                <TextInput style={styles.Input} name="height" keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" />
+                <TextInput style={styles.Input} name= "weightGoal" keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)"/>
                 <CustomButton onPress={handleSubmit(onFinishPress)}>
                     <Text>Home</Text>
                 </CustomButton>

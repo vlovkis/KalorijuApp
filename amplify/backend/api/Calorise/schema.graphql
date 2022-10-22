@@ -1,0 +1,8 @@
+type InfoForm @model @auth(rules: [{allow: public}, {allow: private}]) {
+  id: ID!
+  fullName: String
+  age: Int
+  weight: Int
+  height: Int
+  weightGoal: Int
+}

@@ -1,8 +1,8 @@
 import React, {useState, Component} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import CustomButton from '../../components/CustomButton';
 import {Auth} from 'aws-amplify';
-import AsyncStorage from "react-native";
+import { DataStore } from '@aws-amplify/datastore';
+import { InfoForm } from '../../models';
 
 const Profile = () => {
    
@@ -10,20 +10,24 @@ const Profile = () => {
         Auth.signOut();
     };
 
+    
     return (
         
         <View>
 <Text style={{ fontSize: 24, alignSelf:'center', top:100}}>Profile settings</Text>
 <View style={styles.Inputs}>
-                <TextInput style={styles.Input} placeholder="First Name and Last Name" onChangeText={(text) => setFullNameInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={2} placeholder="Age" onChangeText={(text) => setAgeInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" onChangeText={(text) => setWeightInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" onChangeText={(text) => setHeightInputValue(text)}/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)" onChangeText={(text) => setWeightGoalInputValue(text)}/>
-                <TouchableOpacity onPress={handleSubmit()}>
+                <TextInput style={styles.Input} placeholder="First Name and Last Name"/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={2} placeholder="Age"/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)"/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)"/>
+                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)"/>
+                <TouchableOpacity>
                     <Text>Save</Text>
                 </TouchableOpacity>
             </View>
+
+
+
 <Text
     style={{ fontSize: 24, alignSelf:'center', color: 'red', top:150}}// Reik pagrąžint
     onPress={signOut}
