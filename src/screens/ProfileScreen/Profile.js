@@ -1,30 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import {Auth} from 'aws-amplify';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "react-native";
 
-const Porfile = () => {
-
-    const [ageInputValue, setAgeInputValue] = React.useState('');
-    const [weightInputValue, setWeightInputValue] = React.useState('');
-    const [weightGoalInputValue, setWeightGoalInputValue] = React.useState('');
-    const [heightInputValue, setHeightInputValue] = React.useState('');
-    const [fullNameInputValue, setFullNameInputValue] = React.useState('');
-
-    saveToAsync = async () => {
-        try {
-          await AsyncStorage.setItem("@age", ageInputValue);
-          await AsyncStorage.setItem("@weight", weightInputValue);
-          await AsyncStorage.setItem("@weightG", weightGoalInputValue);
-          await AsyncStorage.setItem("@height", heightInputValue);
-          await AsyncStorage.setItem("@fullN", fullNameInputValue);
-          alert("Information saved");
-        } catch (error) {
-          // Error saving data
-        }
-      };
-
+const Profile = () => {
+   
     const signOut = () => {
         Auth.signOut();
     };
@@ -39,7 +20,7 @@ const Porfile = () => {
                 <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)" onChangeText={(text) => setWeightInputValue(text)}/>
                 <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)" onChangeText={(text) => setHeightInputValue(text)}/>
                 <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)" onChangeText={(text) => setWeightGoalInputValue(text)}/>
-                <TouchableOpacity onPress={() => saveToAsync()}>
+                <TouchableOpacity onPress={handleSubmit()}>
                     <Text>Save</Text>
                 </TouchableOpacity>
             </View>
@@ -92,4 +73,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Porfile
+export default Profile

@@ -10,6 +10,7 @@ const ConfirmEmail = () => {
     const route = useRoute();
     const {control, handleSubmit, watch} = useForm({
         defaultValues: {username: route?.params?.username}
+                        
     });
     const username = watch('username');
 
@@ -18,7 +19,7 @@ const ConfirmEmail = () => {
     const onConfirmNext = async data => {
         try{
         const response = await Auth.confirmSignUp(data.username, data.code);
-        navigation.navigate('AdditionalInfo');
+        navigation.navigate('SignIn');
         } catch (e){
             Alert.alert("Oops", e.message);
         }

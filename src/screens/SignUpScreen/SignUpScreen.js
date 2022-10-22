@@ -16,12 +16,7 @@ const SignUpScreen = () => {
     const onNextPress = async(data) => {
         const {username, password, email, name} = data;
         try {
-            const response = await Auth.signUp({
-                username,
-                password,
-                attributes: {email, name, preferred_username: username},
-            });
-            navigation.navigate("ConfirmEmail", {username});
+            navigation.navigate("AdditionalInfo", {name, username, password});
         } catch (e){
             Alert.alert('Oops', e.message);
         }
