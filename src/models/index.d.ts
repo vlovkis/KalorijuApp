@@ -4,7 +4,7 @@ type InfoFormMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type EagerInfoForm = {
+export declare class InfoForm {
   readonly id: string;
   readonly fullName?: string | null;
   readonly age?: number | null;
@@ -13,21 +13,6 @@ type EagerInfoForm = {
   readonly weightGoal?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
-
-type LazyInfoForm = {
-  readonly id: string;
-  readonly fullName?: string | null;
-  readonly age?: number | null;
-  readonly weight?: number | null;
-  readonly height?: number | null;
-  readonly weightGoal?: number | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type InfoForm = LazyLoading extends LazyLoadingDisabled ? EagerInfoForm : LazyInfoForm
-
-export declare const InfoForm: (new (init: ModelInit<InfoForm, InfoFormMetaData>) => InfoForm) & {
-  copyOf(source: InfoForm, mutator: (draft: MutableModel<InfoForm, InfoFormMetaData>) => MutableModel<InfoForm, InfoFormMetaData> | void): InfoForm;
+  constructor(init: ModelInit<InfoForm, InfoFormMetaData>);
+  static copyOf(source: InfoForm, mutator: (draft: MutableModel<InfoForm, InfoFormMetaData>) => MutableModel<InfoForm, InfoFormMetaData> | void): InfoForm;
 }

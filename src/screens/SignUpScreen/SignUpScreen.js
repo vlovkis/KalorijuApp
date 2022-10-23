@@ -13,14 +13,18 @@ const SignUpScreen = () => {
   const pwd = watch('password');
     const navigation = useNavigation();
     
-    const onNextPress = async(data) => {
-        const {username, password, email, name} = data;
-        try {
-            navigation.navigate("AdditionalInfo", {name, username, password, email});
-        } catch (e){
-            Alert.alert('Oops', e.message);
-        }
-        
+    const onNextPress = async(data) =>{
+        const {username, password, email, age, weight, fullname, height, weightGoal, name }  = data;
+            try {
+                const response = await Auth.signUp({
+                    username,
+                    password,
+                    attributes: {email, 'custom:fullname': fullname, preferred_username: username, 'custom:Age': age, 'custom:Weight': weight, 'custom:Height': height, 'custom:WeightGoal': weightGoal, name},
+                });
+                navigation.navigate("ConfirmEmail", {username});
+            } catch (e){
+                Alert.alert('Oops', e.message);
+            }    
     }
     const onTermsOfUsePressed = () => {
         navigation.navigate("Terms")
@@ -51,6 +55,40 @@ const SignUpScreen = () => {
                 message: 'Name should be max 24 characters long',
             },
             }}
+             />
+             <CustomInput
+             name="fullname"
+             control={control}
+             placeholder={"Full name"}
+             rules={{required: 'Full Name is required'}}
+             />
+            <CustomInput
+             name="age"
+             type="number"
+             control={control}
+             placeholder={"Age"}
+             rules={{required: 'Age is required'}}
+             />
+            <CustomInput
+             name="weight"
+             keyboardType="numeric"
+             control={control}
+             placeholder={"Weight"}
+             rules={{required: 'Weight is required'}}
+             />
+            <CustomInput
+             name="height"
+             keyboardType="numeric"
+             control={control}
+             placeholder={"Height"}
+             rules={{required: 'Height is required'}}
+             />
+                         <CustomInput
+             name="weightGoal"
+             keyboardType="numeric"
+             control={control}
+             placeholder={"Weight Goal"}
+             rules={{required: 'Weight goal is required'}}
              />
              <CustomInput
              name="username"

@@ -1,4 +1,4 @@
-type InfoForm @model @auth(rules: [{allow: public}, {allow: private}]) {
+type InfoForm @model @auth(rules: [{allow: public}, {allow: private}, {allow: owner}]) {
   id: ID!
   fullName: String
   age: Int
@@ -6,3 +6,4 @@ type InfoForm @model @auth(rules: [{allow: public}, {allow: private}]) {
   height: Int
   weightGoal: Int
 }
+ 
