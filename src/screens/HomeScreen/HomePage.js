@@ -69,7 +69,8 @@ export default class HomePage extends React.Component {
           <Text style={{ alignSelf:'center', top:220, fontWeight:'bold' }}>kcal</Text>
           <Text style={{ alignSelf:'center', top:235, }}><Ionic name="walk"/>{this.state.pastStepCount} | <Ionic name="flame"/>kcal</Text>
           <CircularProgress
-                value={64} //CIA BUS IRASOMAS SUNAUDOTAS KALORIJU VALUE
+                value={64}
+                maxValue={1000} //CIA BUS IRASOMAS SUNAUDOTAS KALORIJU VALUE
                 radius={150}
                 progressValueColor={'black'}
                 activeStrokeColor={'#f39c12'}
