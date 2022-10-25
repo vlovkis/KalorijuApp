@@ -57,7 +57,6 @@ const PrivacyPolicy = () => {
         
         </View>
         </ScrollView>
-
     )
 
 }

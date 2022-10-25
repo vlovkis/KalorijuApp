@@ -22,7 +22,7 @@ const SignInScreen = () => {
         setLoading(true);
        try {
         const response = await Auth.signIn(data.username, data.password);
-        navigation.navigate('HomePage');
+        navigation.navigate('Home');
        }
        catch(e){
         Alert.alert('Oops', e.message);
