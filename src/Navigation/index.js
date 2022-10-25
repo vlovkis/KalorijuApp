@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import CerealScreen from '../screens/CerealScreen';
 import ConfirmEmailScreen from '../screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
@@ -14,6 +13,7 @@ import PrivacyScreen from "../screens/PrivacyScreen";
 import TermsScreen from "../screens/TermsScreen";
 import 'react-native-gesture-handler';
 import {Auth, Hub} from 'aws-amplify';
+import CerealScreen from "../screens/CerealScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -54,25 +54,23 @@ const Navigation = () => {
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator screenOptions={{headerShown: false}}>
-                {user ? (
-                    <Stack.Screen name="Home" component={HomeScreen} />
-                ) : (
-                <>
-                
+                {user ? ( //Prisijungus pirmasis ekranas
+                  <>
+                    <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                  </>
+                ) : ( // Neprisijungusių prieinami ekranai
+                 <> 
                 <Stack.Screen name="SignIn" component={SignInScreen} />
                 <Stack.Screen name="SignUp" component={SignUpScreen} />
                 <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen} />
                 <Stack.Screen name="AdditionalInfo" component={AdditionalInfoScreen} />
                 <Stack.Screen name="Privacy" component={PrivacyScreen}/>
                 <Stack.Screen name="Terms" component={TermsScreen}/>
-                <Stack.Screen 
-                    name="ForgotPass" 
-                    component={ForgotPasswordScreen} 
-                    />
+                <Stack.Screen name="ForgotPass" component={ForgotPasswordScreen} />
                 <Stack.Screen name="ResetPass" component={ResetPasswordScreen} />
-                
-                </>
+              </>
                 )}
+               
             </Stack.Navigator>
         </NavigationContainer>
     );
