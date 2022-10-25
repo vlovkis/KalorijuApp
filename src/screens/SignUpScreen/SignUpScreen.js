@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, minLength, maxLength, Alert} from 'react-native';
+import {View, Text, StyleSheet, minLength, maxLength, Alert, ScrollView, SafeAreaView} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from "@react-navigation/native";
@@ -38,9 +38,11 @@ const SignUpScreen = () => {
     }
 
     return (
-        <View style={styles.root}>
+        <SafeAreaView style={styles.root}>
+        <ScrollView style={styles.scrollView}>
         
              <Text style={styles.title}>Create an account</Text>
+             <SafeAreaView style={styles2.root}>
              <CustomInput
              name="name"
              control={control}
@@ -57,12 +59,14 @@ const SignUpScreen = () => {
             }}
              />
              <CustomInput
+              style={styles.custom}
              name="fullname"
              control={control}
              placeholder={"Full name"}
              rules={{required: 'Full Name is required'}}
              />
             <CustomInput
+             style={styles.custom}
              name="age"
              type="number"
              control={control}
@@ -70,6 +74,7 @@ const SignUpScreen = () => {
              rules={{required: 'Age is required'}}
              />
             <CustomInput
+             style={styles.custom}
              name="weight"
              keyboardType="numeric"
              control={control}
@@ -77,6 +82,7 @@ const SignUpScreen = () => {
              rules={{required: 'Weight is required'}}
              />
             <CustomInput
+             style={styles.custom}
              name="height"
              keyboardType="numeric"
              control={control}
@@ -84,6 +90,7 @@ const SignUpScreen = () => {
              rules={{required: 'Height is required'}}
              />
                          <CustomInput
+             style={styles.custom}
              name="weightGoal"
              keyboardType="numeric"
              control={control}
@@ -91,6 +98,7 @@ const SignUpScreen = () => {
              rules={{required: 'Weight goal is required'}}
              />
              <CustomInput
+              style={styles.custom}
              name="username"
              control={control}
              placeholder={"Username"}
@@ -115,6 +123,7 @@ const SignUpScreen = () => {
         }}
             />
              <CustomInput
+              style={styles.custom}
              name="password"
              placeholder={"Password"}
              control={control}
@@ -127,6 +136,7 @@ const SignUpScreen = () => {
              }}
              />
              <CustomInput
+            style={styles.custom}
              name="confirm-password"
              placeholder={"Confirm Password"}
              control={control}
@@ -135,27 +145,44 @@ const SignUpScreen = () => {
                 validate: value => value === pwd || 'Password does not match',
              }}
              />
+             </SafeAreaView>
              <Text style={styles.SmallText}>By registering, you confirm that you accept our 
              <Text style={styles.link} onPress={onTermsOfUsePressed}> Terms of use</Text> 
              <Text style={styles.SmallText}> and </Text>
              <Text style={styles.link} onPress={onPrivacyPolicyPressed}>Privacy policy</Text>
              </Text>
              <CustomButton
+            
              text="NEXT ->"
              onPress={handleSubmit(onNextPress)}
              />
+             
               <Text style={styles.SignInText}> Already have an account?</Text>
               <Text style={styles.SignInButton} onPress={onSignIn}>Sign In</Text>
 
-        </View>
+              </ScrollView>
+        </SafeAreaView>
     );
 };
-
+const styles2 = StyleSheet.create({
+    root: {
+        left: 30,
+    }
+});
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        top: 80,
+        top: 50,
+        left: 1,
     },
+    scrollView: {
+        
+        paddingVertical: 20,
+        top: 5,
+        left: 10,
+        
+       
+      },
     logo: {
         width: 500,
         maxWidth: 500,
@@ -177,10 +204,10 @@ const styles = StyleSheet.create({
         paddingRight: 25,
         marginTop: 20,
         marginBottom: -30,
-        paddingLeft: 25,
+        paddingLeft: 15,
     },
     SignInButton:{
-        paddingTop:15,
+        paddingTop:10,
         color: "#FCA13A",
     },
     title:{
@@ -188,7 +215,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         paddingRight: 100,
         marginBottom: 10,
-        paddingLeft: 20,
+        paddingLeft: 10,
+        
     },
     link:{
         color:"#FCA13A",
@@ -198,7 +226,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignSelf: 'center',
         color: '#818181',
-        
-    }
+        top: 50,
+
+    },
 });
 export default SignUpScreen

@@ -1,23 +1,37 @@
-import React, {useEffect, useState} from 'react'
-import {View, Text, StyleSheet, TouchableOpacity,} from 'react-native'
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity,} from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
+import 'react-native-gesture-handler';
 
-
+const CerealStack = createNativeStackNavigator();
+function CerealStackScreen(){
+  return(
+    <CerealStack.Navigator>
+      <CerealStack.Screen
+          name="Cereal"
+          component={CerealScreen}
+>
+      </CerealStack.Screen>
+    </CerealStack.Navigator>
+  );
+}
 
 const AddFood = () => {
- 
   const navigation = useNavigation();
 
   const onPressCereal = () => {
-    navigation.navigate('Cereal')
+    navigation.navigate("Cereal");
   }
 
     return (
+      
         <View>
+        
 <Text style={{ fontSize: 40, top:100, fontWeight:'bold', left:40, width: "60%", lineHeight: 40}}>SELECT CATEGORY</Text>
 
       <View style={styles.row}>
+
 <TouchableOpacity style={styles.touch} onPress={onPressCereal}> 
    <Text style={styles.button}>
        Cereal
@@ -53,9 +67,10 @@ const AddFood = () => {
        Fruit
    </Text>
 </TouchableOpacity >
-</View>  
 
-        </View>
+</View>
+</View>
+        
 
     )
 }

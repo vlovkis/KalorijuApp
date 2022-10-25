@@ -6,11 +6,13 @@ import SignUpScreen from '../src/screens/SignUpScreen';
 import ConfirmEmailScreen from '../src/screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from '../src/screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../src/screens/ResetPasswordScreen';
+import CerealScreen from '../src/screens/CerealScreen';
 import Navigation from '../src/Navigation';
 import 'react-native-gesture-handler';
 import Amplify from 'aws-amplify';
 
 import awsconfig from '../src/aws-exports';
+
 
 Amplify.configure(awsconfig);
 const App = () => {
