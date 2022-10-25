@@ -1,17 +1,24 @@
 import React, {useEffect, useState} from 'react'
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity,} from 'react-native'
+import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 
 
 const AddFood = () => {
  
+  const navigation = useNavigation();
+
+  const onPressCereal = () => {
+    navigation.navigate('Cereal')
+  }
 
     return (
         <View>
 <Text style={{ fontSize: 40, top:100, fontWeight:'bold', left:40, width: "60%", lineHeight: 40}}>SELECT CATEGORY</Text>
 
       <View style={styles.row}>
-<TouchableOpacity style={styles.touch}> 
+<TouchableOpacity style={styles.touch} onPress={onPressCereal}> 
    <Text style={styles.button}>
        Cereal
    </Text>

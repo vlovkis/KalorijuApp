@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import CerealScreen from '../screens/CerealScreen';
 import ConfirmEmailScreen from '../screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
@@ -64,7 +65,6 @@ const Navigation = () => {
                 <Stack.Screen name="AdditionalInfo" component={AdditionalInfoScreen} />
                 <Stack.Screen name="Privacy" component={PrivacyScreen}/>
                 <Stack.Screen name="Terms" component={TermsScreen}/>
-
                 <Stack.Screen 
                     name="ForgotPass" 
                     component={ForgotPasswordScreen} 
