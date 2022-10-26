@@ -43,7 +43,6 @@ const Navigation = () => {
       Hub.listen('auth', listener);
       return () => Hub.remove('auth', listener);
     }, []);
-  
     if (user === undefined) {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -55,9 +54,13 @@ const Navigation = () => {
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator screenOptions={{headerShown: false}}>
-                {!user ? ( //Prisijungus pirmasis ekranas
-                  <>
-                <Stack.Screen name="SignIn" component={SignInScreen} />
+                {user ? (
+                  <Stack.Group>
+                <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                  </Stack.Group>
+                ) : ( 
+                <Stack.Group>
+                 <Stack.Screen name="SignIn" component={SignInScreen} />
                 <Stack.Screen name="SignUp" component={SignUpScreen} />
                 <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen} />
                 <Stack.Screen name="AdditionalInfo" component={AdditionalInfoScreen} />
@@ -65,15 +68,9 @@ const Navigation = () => {
                 <Stack.Screen name="Terms" component={TermsScreen}/>
                 <Stack.Screen name="ForgotPass" component={ForgotPasswordScreen} />
                 <Stack.Screen name="ResetPass" component={ResetPasswordScreen} />
-                  </>
-                ) : ( // Neprisijungusių prieinami ekranai
-                 <> 
-                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                 <Stack.Screen name="Add" component={AddFoodScreen} />
-              
-              </>
+              </Stack.Group>
+             
                 )}
-               
             </Stack.Navigator>
         </NavigationContainer>
     );

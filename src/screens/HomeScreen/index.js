@@ -1,19 +1,15 @@
 import React from 'react'
-import {View, Text} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import StatisticsScreen from '../StatisticScreen/Statistic';
 import AddFoodScreen from '../AddFoodScreen/AddFood';
 import ProfileScreen from '../ProfileScreen/Profile';
 import HomeScreen from '../HomeScreen/HomePage';
-import CerealScreen from '../CerealScreen';
 
 
 const index = () => {
     const Tab = createBottomTabNavigator();
-    const Stack = createNativeStackNavigator();
     return (
         <NavigationContainer independent={true}>
             <Tab.Navigator
