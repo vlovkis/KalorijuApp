@@ -14,12 +14,12 @@ import TermsScreen from "../screens/TermsScreen";
 import 'react-native-gesture-handler';
 import {Auth, Hub} from 'aws-amplify';
 import CerealScreen from "../screens/CerealScreen";
-
+import AddFoodScreen from "../screens/AddFoodScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
     const [user, setUser] = useState(undefined);
-
+  
     const checkUser = async () => {
       try {
         const authUser = await Auth.currentAuthenticatedUser({bypassCache: true});
@@ -43,7 +43,6 @@ const Navigation = () => {
       Hub.listen('auth', listener);
       return () => Hub.remove('auth', listener);
     }, []);
-  
     if (user === undefined) {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -55,13 +54,13 @@ const Navigation = () => {
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator screenOptions={{headerShown: false}}>
-                {user ? ( //Prisijungus pirmasis ekranas
-                  <>
-                    <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                  </>
-                ) : ( // Neprisijungusių prieinami ekranai
-                 <> 
-                <Stack.Screen name="SignIn" component={SignInScreen} />
+                {user ? (
+                  <Stack.Group>
+                <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                  </Stack.Group>
+                ) : ( 
+                <Stack.Group>
+                 <Stack.Screen name="SignIn" component={SignInScreen} />
                 <Stack.Screen name="SignUp" component={SignUpScreen} />
                 <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen} />
                 <Stack.Screen name="AdditionalInfo" component={AdditionalInfoScreen} />
@@ -69,11 +68,11 @@ const Navigation = () => {
                 <Stack.Screen name="Terms" component={TermsScreen}/>
                 <Stack.Screen name="ForgotPass" component={ForgotPasswordScreen} />
                 <Stack.Screen name="ResetPass" component={ResetPasswordScreen} />
-              </>
+              </Stack.Group>
+             
                 )}
             </Stack.Navigator>
         </NavigationContainer>
-
     );
 }
 
