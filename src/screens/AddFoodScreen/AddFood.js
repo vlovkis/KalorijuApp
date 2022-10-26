@@ -16,8 +16,8 @@ const AddFood = () => {
       <View style={styles.row}>
 
 
-<TouchableOpacity style={styles.touch} onPress={navigation.navigate('Cereal')}> 
-   <Text style={styles.button}>
+<TouchableOpacity style={styles.touch}> 
+   <Text style={styles.button} onPress={navigation.navigate("Cereal")}>
        Cereal
    </Text>
 </TouchableOpacity >

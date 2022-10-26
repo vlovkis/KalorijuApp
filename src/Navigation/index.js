@@ -14,12 +14,12 @@ import TermsScreen from "../screens/TermsScreen";
 import 'react-native-gesture-handler';
 import {Auth, Hub} from 'aws-amplify';
 import CerealScreen from "../screens/CerealScreen";
-
+import AddFoodScreen from "../screens/AddFoodScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
     const [user, setUser] = useState(undefined);
-
+  
     const checkUser = async () => {
       try {
         const authUser = await Auth.currentAuthenticatedUser({bypassCache: true});
@@ -55,12 +55,8 @@ const Navigation = () => {
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator screenOptions={{headerShown: false}}>
-                {user ? ( //Prisijungus pirmasis ekranas
+                {!user ? ( //Prisijungus pirmasis ekranas
                   <>
-                    <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                  </>
-                ) : ( // Neprisijungusių prieinami ekranai
-                 <> 
                 <Stack.Screen name="SignIn" component={SignInScreen} />
                 <Stack.Screen name="SignUp" component={SignUpScreen} />
                 <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen} />
@@ -69,11 +65,17 @@ const Navigation = () => {
                 <Stack.Screen name="Terms" component={TermsScreen}/>
                 <Stack.Screen name="ForgotPass" component={ForgotPasswordScreen} />
                 <Stack.Screen name="ResetPass" component={ResetPasswordScreen} />
+                  </>
+                ) : ( // Neprisijungusių prieinami ekranai
+                 <> 
+                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                 <Stack.Screen name="Add" component={AddFoodScreen} />
+              
               </>
                 )}
+               
             </Stack.Navigator>
         </NavigationContainer>
-
     );
 }
 
