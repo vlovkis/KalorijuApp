@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import StatisticsScreen from '../StatisticScreen/Statistic';
@@ -10,6 +10,8 @@ import HomeScreen from '../HomeScreen/HomePage';
 
 const index = () => {
     const Tab = createBottomTabNavigator();
+
+
     return (
         <NavigationContainer independent={true}>
             <Tab.Navigator
@@ -43,6 +45,7 @@ const index = () => {
                 <Tab.Screen name="Add" component={AddFoodScreen}/>
                 <Tab.Screen name="Profile" component={ProfileScreen}/>
             </Tab.Navigator>
+
         </NavigationContainer>
     )
 };

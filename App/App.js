@@ -11,6 +11,7 @@ import 'react-native-gesture-handler';
 import Amplify from 'aws-amplify';
 
 import awsconfig from '../src/aws-exports';
+import React from 'react';
 
 
 Amplify.configure(awsconfig);
@@ -19,8 +20,8 @@ const App = () => {
   return (
     //<View style={styles.container}>
       <Navigation style={styles.container}/>
-      //<StatusBar style="auto" />
     //</View>
+    //<StatusBar style="auto" />
   );
 }
 

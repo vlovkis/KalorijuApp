@@ -2,10 +2,10 @@ import React from "react";
 import {View, Text} from 'react-native';
 
 
-export default class MeatAndFish extends React.Component {
+const MeatAndFish = () => {
 
 
-    render(){
+    
         return(
 
             <View>
@@ -13,5 +13,7 @@ export default class MeatAndFish extends React.Component {
             </View>
 
         );
-    }
+    
 }
+
+export default MeatAndFish

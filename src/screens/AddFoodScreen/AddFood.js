@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import React, {useEffect, useState, Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import 'react-native-gesture-handler';
@@ -6,22 +6,25 @@ import 'react-native-gesture-handler';
 const AddFood = () => {
   
  const navigation = useNavigation();
+
+
+
  
     return (
+
       
-        <View>
+        <View>      
         
 <Text style={{ fontSize: 40, top:100, fontWeight:'bold', left:40, width: "60%", lineHeight: 40}}>SELECT CATEGORY</Text>
 
       <View style={styles.row}>
 
-
-<TouchableOpacity style={styles.touch} onPress={() => {navigation.navigate('Add', {screen :"Cereal"})}}> 
+<TouchableOpacity style={styles.touch} onPress={navigation.navigate('Cereal')}> 
    <Text style={styles.button}>
        Cereal
    </Text>
 </TouchableOpacity >
-<TouchableOpacity style={styles.touch}> 
+<TouchableOpacity style={styles.touch} onPress={navigation.navigate('Fish')}> 
    <Text style={styles.button}>
        Meat and fish
    </Text>

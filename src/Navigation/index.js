@@ -13,8 +13,6 @@ import PrivacyScreen from "../screens/PrivacyScreen";
 import TermsScreen from "../screens/TermsScreen";
 import 'react-native-gesture-handler';
 import {Auth, Hub} from 'aws-amplify';
-import CerealScreen from "../screens/CerealScreen";
-import AddFoodScreen from "../screens/AddFoodScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -73,6 +71,9 @@ const Navigation = () => {
                 )}
             </Stack.Navigator>
         </NavigationContainer>
+    
+
+    
     );
 }
 
