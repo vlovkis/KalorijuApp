@@ -5,7 +5,7 @@ import CustomButton from "../../components/CustomButton";
 
 
 const Cereal = () => {
-    const navigation = useNavigation();
+
 
 
 

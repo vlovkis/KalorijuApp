@@ -15,10 +15,11 @@ import 'react-native-gesture-handler';
 import {Auth, Hub} from 'aws-amplify';
 import CerealScreen from "../screens/CerealScreen";
 
+
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
     const [user, setUser] = useState(undefined);
-  
+
     const checkUser = async () => {
       try {
         const authUser = await Auth.currentAuthenticatedUser({bypassCache: true});
@@ -70,9 +71,9 @@ const Navigation = () => {
                 <Stack.Screen name="ResetPass" component={ResetPasswordScreen} />
               </>
                 )}
-               
             </Stack.Navigator>
         </NavigationContainer>
+
     );
 }
 
