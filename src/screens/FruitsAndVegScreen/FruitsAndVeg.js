@@ -3,11 +3,11 @@ import {View, Text} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
 
-export default class FruitsAndVeg extends React.Component {
+const FruitsAndVeg = () => {
 
     navigation = useNavigation();
 
-    render(){
+
         return(
 
             <View>
@@ -16,4 +16,6 @@ export default class FruitsAndVeg extends React.Component {
 
         );
     }
-}
+
+
+export default FruitsAndVeg

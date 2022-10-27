@@ -2,12 +2,11 @@ import React from "react";
 import {View, Text} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-
-export default class MilkAndDairy extends React.Component {
+const MilkAndDairy = () => {
 
     navigation = useNavigation();
 
-    render(){
+    
         return(
 
             <View>
@@ -15,5 +14,7 @@ export default class MilkAndDairy extends React.Component {
             </View>
 
         );
-    }
+    
 }
+
+export default MilkAndDairy

@@ -2,61 +2,48 @@ import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import React, {useEffect, useState, Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import 'react-native-gesture-handler';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CerealScreen from '../CerealScreen'
+import MilkAndDairy from '../MilkAndDairyScreen'
+import MeatAndFish from '../MeatAndFishScreen'
+import FatsAndSugar from '../FatsAndSugarScreen'
+import FruitsAndVeg from '../FruitsAndVegScreen'
+import Fruit from '../FruitScreen'
 
-const AddFood = () => {
+const AddFood = (props) => {
+
+  const Stack = createNativeStackNavigator();
+
+  function MainScreen({navigation}) {
+    return (
+      <View>
+      <View style = {styles.button}>
+      <Button title = "Cereal" onPress={() => navigation.navigate('Cereal')} />
+      <Button title = 'Milk and Dairy' onPress={() => navigation.navigate('MilkAndDairy')} />
+      <Button title = 'Meat and Fish' onPress={() => navigation.navigate('MeatAndFish')} />
+      <Button title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
+      <Button title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
+      <Button title = 'Fruit' onPress={() => navigation.navigate('Fruit')} />
+      </View>
+      </View>
+  );
+}
   
- const navigation = useNavigation();
-
-
-
  
     return (
 
-      
-        <View>      
-        
-<Text style={{ fontSize: 40, top:100, fontWeight:'bold', left:40, width: "60%", lineHeight: 40}}>SELECT CATEGORY</Text>
-
-      <View style={styles.row}>
-
-<TouchableOpacity style={styles.touch} onPress={navigation.navigate('Cereal')}> 
-   <Text style={styles.button}>
-       Cereal
-   </Text>
-</TouchableOpacity >
-<TouchableOpacity style={styles.touch} onPress={navigation.navigate('Fish')}> 
-   <Text style={styles.button}>
-       Meat and fish
-   </Text>
-</TouchableOpacity >
-
-<TouchableOpacity style={styles.touch}> 
-   <Text style={styles.button}>
-       Fruits and vegetables
-   </Text>
-</TouchableOpacity >
-
-<TouchableOpacity style={styles.touch}> 
-   <Text style={styles.button}>
-       Milk and dairy
-   </Text>
-</TouchableOpacity >
-
-<TouchableOpacity style={styles.touch}> 
-   <Text style={styles.button}>
-       Fats and sugars
-   </Text>
-</TouchableOpacity >
-
-<TouchableOpacity style={styles.touch}> 
-   <Text style={styles.button}>
-       Fruit
-   </Text>
-</TouchableOpacity >
-
-</View>
-</View>
-        
+      <NavigationContainer independent={true}>
+      <Stack.Navigator screenOptions = {{headerShown: false}}>
+      <Stack.Screen name = "Main" component = {MainScreen}/>
+      <Stack.Screen name = 'Cereal' component={CerealScreen} />
+      <Stack.Screen name = 'MeatAndFish' component= {MeatAndFish} />
+      <Stack.Screen name = "MilkAndDairy" component = {MilkAndDairy}/>
+      <Stack.Screen name = 'FruitsAndVeg' component={FruitsAndVeg} />
+      <Stack.Screen name = 'FatsAndSugar' component={FatsAndSugar} />
+      <Stack.Screen name = 'Fruit' component={Fruit} />
+      </Stack.Navigator>
+      </NavigationContainer>
+    
 
     )
 }
@@ -76,15 +63,15 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   button: {
-    color: "white",
+    color: "black",
     fontSize:20,
     justifyContent: "center",
     display: 'flex',
     textAlign: 'left',
     fontWeight: 'bold',
-    height: 60,
     padding: 17,
     borderRadius: 20,
+    top:20,
 
     
   },

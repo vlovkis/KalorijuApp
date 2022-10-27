@@ -3,11 +3,11 @@ import {View, Text} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
 
-export default class FatsAndSugar extends React.Component {
+const FatsAndSugar = () => {
 
     navigation = useNavigation();
 
-    render(){
+   
         return(
 
             <View>
@@ -16,4 +16,5 @@ export default class FatsAndSugar extends React.Component {
 
         );
     }
-}
+
+export default FatsAndSugar

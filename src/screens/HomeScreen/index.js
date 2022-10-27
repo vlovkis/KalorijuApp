@@ -11,7 +11,6 @@ import HomeScreen from '../HomeScreen/HomePage';
 const index = () => {
     const Tab = createBottomTabNavigator();
 
-
     return (
         <NavigationContainer independent={true}>
             <Tab.Navigator
@@ -45,8 +44,10 @@ const index = () => {
                 <Tab.Screen name="Add" component={AddFoodScreen}/>
                 <Tab.Screen name="Profile" component={ProfileScreen}/>
             </Tab.Navigator>
+            
 
         </NavigationContainer>
     )
 };
+
 export default index

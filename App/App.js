@@ -19,7 +19,9 @@ const App = () => {
   //Auth.signOut();
   return (
     //<View style={styles.container}>
+    <React.Fragment>
       <Navigation style={styles.container}/>
+      </React.Fragment>
     //</View>
     //<StatusBar style="auto" />
   );
