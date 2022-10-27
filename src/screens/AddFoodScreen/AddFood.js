@@ -3,6 +3,7 @@ import React, {useEffect, useState, Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CustomNavButton from '../../components/CustomNavButton';
 import CerealScreen from '../CerealScreen'
 import MilkAndDairy from '../MilkAndDairyScreen'
 import MeatAndFish from '../MeatAndFishScreen'
@@ -16,15 +17,16 @@ const AddFood = (props) => {
 
   function MainScreen({navigation}) {
     return (
-      <View>
-      <View style = {styles.button}>
-      <Button title = "Cereal" onPress={() => navigation.navigate('Cereal')} />
-      <Button title = 'Milk and Dairy' onPress={() => navigation.navigate('MilkAndDairy')} />
-      <Button title = 'Meat and Fish' onPress={() => navigation.navigate('MeatAndFish')} />
-      <Button title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
-      <Button title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
-      <Button title = 'Fruit' onPress={() => navigation.navigate('Fruit')} />
-      </View>
+      <View style={styles.root}>
+      <Text style={styles.title}>Pick a food type</Text>
+      <CustomNavButton text="Cereal" title = "Cereal" onPress={() => navigation.navigate('Cereal')}>
+        <Text style={styles.name}>Cereal</Text>
+      </CustomNavButton>
+      <CustomNavButton text="Milk and Dairy" title = 'Milk and Dairy' onPress={() => navigation.navigate('MilkAndDairy')} />
+      <CustomNavButton text="Meat and fish" title = 'Meat and Fish' onPress={() => navigation.navigate('MeatAndFish')} />
+      <CustomNavButton text="Vegetables" title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
+      <CustomNavButton text="Fats and Sugars" title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
+      <CustomNavButton text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')} />
       </View>
   );
 }
@@ -47,8 +49,21 @@ const AddFood = (props) => {
 
     )
 }
-
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 40,
+    fontWeight: "bold",
+    paddingRight: 20,
+    marginBottom: 30,
+    paddingLeft: 20,
+    top: 20,
+    alignSelf: 'center',
+
+  },
+  root : {
+    top:"5%",
+
+  },
   row:{ 
     flexDirection: 'column',
     justifyContent: 'center',
@@ -72,6 +87,7 @@ const styles = StyleSheet.create({
     padding: 17,
     borderRadius: 20,
     top:20,
+    paddingBottom: 10,
 
     
   },

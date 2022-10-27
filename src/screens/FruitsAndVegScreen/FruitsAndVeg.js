@@ -11,7 +11,7 @@ const FruitsAndVeg = () => {
         return(
 
             <View>
-                <Text>Fruits and Vegetables</Text>
+                <Text>Vegetables</Text>
             </View>
 
         );
