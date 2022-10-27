@@ -1,37 +1,31 @@
-import React, {useState, Component} from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Auth} from 'aws-amplify';
-import { DataStore } from '@aws-amplify/datastore';
-import { InfoForm } from '../../models';
+    
 
+    
 const Profile = () => {
    
     const signOut = () => {
         Auth.signOut();
     };
 
-    
+
+
+
     return (
         
         <View>
-<Text style={{ fontSize: 24, alignSelf:'center', top:100}}>Profile settings</Text>
-<View style={styles.Inputs}>
-                <TextInput style={styles.Input} placeholder="First Name and Last Name"/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={2} placeholder="Age"/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight (Kg)"/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Height (Cm)"/>
-                <TextInput style={styles.Input} keyboardType='numeric' maxLength={3} placeholder="Weight Goal (Kg)"/>
-                <TouchableOpacity>
-                    <Text>Save</Text>
-                </TouchableOpacity>
-            </View>
+        <Text style={{ fontSize: 24, alignSelf:'center', top:100}}>User profile</Text>
 
 
 
-<Text
-    style={{ fontSize: 24, alignSelf:'center', color: 'red', top:150}}// Reik pagrąžint
-    onPress={signOut}
-> Sign Out </Text>
+
+        <TouchableOpacity style={styles.signOut} onPress={signOut}>
+            <Text style={styles.signOutText}>
+            Sign Out
+            </Text>
+        </TouchableOpacity>
         </View>
 
     )
@@ -40,6 +34,20 @@ const Profile = () => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
+    },
+    signOutText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 20,
+    },
+    signOut: {
+        width:250,
+        padding: 10,
+        alignSelf:'center', 
+        backgroundColor: 'red',
+        borderColor: 'red',
+        borderRadius: '25px', 
+        top: 650
     },
     Text:{
         fontSize: 40,
