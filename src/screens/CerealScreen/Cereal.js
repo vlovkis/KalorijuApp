@@ -1,46 +1,65 @@
 import React, { useState } from "react";
 import {View, Text, Button, StyleSheet, SafeAreaView, Image, FlatList, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "react-native";
 import Ionic from 'react-native-vector-icons/Ionicons';
-import { ImageBackground } from "react-native";
+
+//Bagel foto
+const bagel = Image.resolveAssetSource(require('./assets/images/bagel.png')).uri;
+
+//Cornflakes foto
+const cornflakes = Image.resolveAssetSource(require('./assets/images/cornflakes.png')).uri;
+
+//Muesli foto
+const muesli = Image.resolveAssetSource(require('./assets/images/muesli.png')).uri;
+
+//Crumpets foto
+const crumpets = Image.resolveAssetSource(require('./assets/images/crumpets.png')).uri;
+
+//Chapatis foto
+const chaptis = Image.resolveAssetSource(require('./assets/images/chaptis.png')).uri;
+
+//FruitMix foto
+const fruitMix = Image.resolveAssetSource(require('./assets/images/fruitMix.png')).uri;
+
 const DATA = [
+    
+
     {
         title : "Bagel",
         portionSize : 140,
-        imageUrl: 'https://images.unsplash.com/photo-1601640790698-5a509963cf01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        imageUrl: bagel,
         id : 1,
         
     },
     {
         title : "Cornflakes" ,
         portionSize : 130 ,
-        imageUrl: 'https://images.unsplash.com/photo-1601640790698-5a509963cf01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        imageUrl: cornflakes,
         id : 2,
         
     },
     {
         title : "Muesli" ,
         portionSize : 195 ,
-        imageUrl: 'https://images.unsplash.com/photo-1601640790698-5a509963cf01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        imageUrl: muesli,
         id : 3,
     },
     {
         title : "Crumpets" ,
         portionSize : 93 ,
-        imageUrl: 'https://images.unsplash.com/photo-1601640790698-5a509963cf01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        imageUrl: crumpets,
         id : 4,
     },
     {
         title : "Chapatis" ,
         portionSize: 250 ,
-        imageUrl: 'https://images.unsplash.com/photo-1601640790698-5a509963cf01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        imageUrl: chaptis,
         id : 5,
     },
     {
         title : "basic fruit mix" ,
         portionSize : 320 ,
-        imageUrl: 'https://images.unsplash.com/photo-1601640790698-5a509963cf01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        imageUrl: fruitMix,
         id : 6,
     },
 ];
@@ -58,6 +77,7 @@ const [selectedId, setSelectedId] = useState(null);
 const renderItem =({item}) => {
     const backgroundColor = item.id === selectedId ? "orange" : "#fff";
     const color = item.id === selectedId ? 'white' : 'black';
+
     
     return(
     <Item
@@ -75,6 +95,7 @@ const navigation = useNavigation();
 
             <View>
                 <Ionic name="arrow-back" onPress={() => navigation.goBack()} style={{fontSize: 30, bottom:110, left: 20, paddingTop: 180}}/>
+                <Ionic name="checkmark" style={{fontSize: 40, position: "absolute", left: "80%", top:75, color: "green"}}/>
                 <Text style={styles.mainText}>Cereal</Text>
 
                 <SafeAreaView style={styles.container}>

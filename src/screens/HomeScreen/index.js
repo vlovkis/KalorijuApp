@@ -10,9 +10,9 @@ import HomeScreen from '../HomeScreen/HomePage';
 
 const index = () => {
     const Tab = createBottomTabNavigator();
-
+    
     return (
-        <NavigationContainer independent={true}>
+        <NavigationContainer independent={true} >
             <Tab.Navigator
              screenOptions={({route}) =>({
                 headerShown: false,
@@ -45,7 +45,7 @@ const index = () => {
                 <Tab.Screen name="Profile" component={ProfileScreen}/>
             </Tab.Navigator>
             
-
+             
         </NavigationContainer>
     )
 };

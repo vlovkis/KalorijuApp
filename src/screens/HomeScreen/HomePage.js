@@ -4,8 +4,8 @@ import CircularProgress from 'react-native-circular-progress-indicator';
 import { Pedometer } from 'expo-sensors';
 import Ionic from 'react-native-vector-icons/Ionicons';
 
-
 export default class HomePage extends React.Component {
+    
     state = {
       isPedometerAvailable: 'checking',
       pastStepCount: 0,
@@ -62,6 +62,7 @@ export default class HomePage extends React.Component {
     
   
     render() {
+      
       return (
         <View style={{ alignSelf:'center', top:180}}>
           <Text style={{ alignSelf:'center', bottom:80, fontSize: 40, fontWeight:'bold'}}>HOME</Text>
