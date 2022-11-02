@@ -1,5 +1,5 @@
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
-import React, {useEffect, useState, Component} from 'react';
+import React, {useEffect, useState, Component, useRef, usePrevious} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -20,21 +20,31 @@ const AddFood = (props) => {
   function MainScreen({navigation, route}) { 
     
     const [kcalsTotal, setkcalsTotal] = useState(null);
-    useEffect(() => {
-      if (route.params?.kcals) {
-        console.log('Sent Successfully');
-        
-      }
-     }, [route.params?.kcals]);
+    const prevKcal = usePrevious(route.params?.kcals);
 
-     alert([route.params?.kcals]);
+
+    function usePrevious(value) {
+      const ref = useRef();
+
+      useEffect(() => {
+        ref.current = value;
+      }, [value]); // Only re-run if value changes
+      // Return previous value (happens before update in useEffect above)
+      return ref.current;
+    }
+
+    console.log(prevKcal + route.params?.kcals) // Suma kalorijų
+    //Reikia dabar padaryti funkciją onSubmit siųsti parametrus tų skaičių,
+    // bet reikia daryt su if'ais, nes žmogus gal pasirinktų tik vieną produktą arba du. 
+
      // Reikia kažkokiais būdais sugalvot kaip reikia sumuot ateinančias kalorijas.
      // Tada reiks sukurt mygtuką su onclick kuris submitina susumuotas kalorijas ir siunčia į homescreeną.
      // [route.params?.kcals] paima atsiūstus duomenis, bet ištrina praeitą portionSize jei pasirenki naują.
     return (
       <View style={styles.root}>
       <Text style={styles.title}>Pick a food type</Text>
-      <Text style={styles.text}>Turimos kcal</Text>
+      <Text style={styles.text}>1st pick:{route.params?.kcals} kcals</Text>
+      <Text style={styles.text}>2nd pick:{prevKcal} kcals</Text>
       <CustomNavButton text="Cereal" title = "Cereal" onPress={() => navigation.navigate('Cereal')}>
         <Text style={styles.name}>Cereal</Text>
       </CustomNavButton>
@@ -43,6 +53,9 @@ const AddFood = (props) => {
       <CustomNavButton text="Vegies and Fruits" title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
       <CustomNavButton text="Fats and Sugars" title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
       <CustomNavButton text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')} />
+      <TouchableOpacity style={styles.submitTouch}>
+        <Text style={styles.submit}>Submit calories</Text>
+      </TouchableOpacity>
       </View>
   );
 }
@@ -76,6 +89,28 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
 
   },
+  text: {
+    top: "83%",
+    textAlign: 'center',
+    fontSize: 15,
+  },
+  submit: {
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+
+  },
+  submitTouch: {
+    left: "27%",
+    top: "11%",
+    borderWidth: 2,
+    borderRadius: 20,
+    borderColor: "#32a852",
+    width: 180,
+    padding: 10,
+    backgroundColor: "#32a852",
+    
+  },
   root : {
     top:"5%",
 
@@ -93,20 +128,7 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
     margin: 5,
   },
-  button: {
-    color: "black",
-    fontSize:20,
-    justifyContent: "center",
-    display: 'flex',
-    textAlign: 'left',
-    fontWeight: 'bold',
-    padding: 17,
-    borderRadius: 20,
-    top:20,
-    paddingBottom: 10,
 
-    
-  },
 });
 
 export default AddFood
