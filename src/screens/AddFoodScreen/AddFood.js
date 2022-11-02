@@ -10,41 +10,49 @@ import MeatAndFish from '../MeatAndFishScreen'
 import FatsAndSugar from '../FatsAndSugarScreen'
 import FruitsAndVeg from '../FruitsAndVegScreen'
 import Fruit from '../FruitScreen'
+import CustomSubmit from '../../components/CustomSubmit';
 
 
  
 
 const AddFood = (props) => {
+  const [totalKcals, setTotalKcals] = useState([]);
+
   const Stack = createNativeStackNavigator();
-
+   function onSubmit({navigation, route}) {
+      navigation.navigate('Home');
+    }
   function MainScreen({navigation, route}) { 
-    
-    const [kcalsTotal, setkcalsTotal] = useState(null);
-    const prevKcal = usePrevious(route.params?.kcals);
+   
 
+    const calculate = () => {
+      setTotalKcals(route.params?.kcals + prevKcal);
+    }
+    const prevKcal = usePrevious(route.params?.kcals);
 
     function usePrevious(value) {
       const ref = useRef();
 
       useEffect(() => {
         ref.current = value;
-      }, [value]); // Only re-run if value changes
+      },   [value]); // Only re-run if value changes
       // Return previous value (happens before update in useEffect above)
       return ref.current;
     }
 
-    console.log(prevKcal + route.params?.kcals) // Suma kalorijų
+
+    // Suma kalorijų
     //Reikia dabar padaryti funkciją onSubmit siųsti parametrus tų skaičių,
     // bet reikia daryt su if'ais, nes žmogus gal pasirinktų tik vieną produktą arba du. 
 
-     // Reikia kažkokiais būdais sugalvot kaip reikia sumuot ateinančias kalorijas.
-     // Tada reiks sukurt mygtuką su onclick kuris submitina susumuotas kalorijas ir siunčia į homescreeną.
-     // [route.params?.kcals] paima atsiūstus duomenis, bet ištrina praeitą portionSize jei pasirenki naują.
+              //<Text style={styles.text}>1st pick:{route.params?.kcals} kcals</Text>
+              //<Text style={styles.text}>2nd pick:{prevKcal} kcals</Text>
     return (
       <View style={styles.root}>
       <Text style={styles.title}>Pick a food type</Text>
-      <Text style={styles.text}>1st pick:{route.params?.kcals} kcals</Text>
-      <Text style={styles.text}>2nd pick:{prevKcal} kcals</Text>
+            <Text>Previous: {prevKcal}</Text>
+            <Text>Current: {route.params?.kcals}</Text>
+            <Text>Total: {totalKcals}</Text>
       <CustomNavButton text="Cereal" title = "Cereal" onPress={() => navigation.navigate('Cereal')}>
         <Text style={styles.name}>Cereal</Text>
       </CustomNavButton>
@@ -53,9 +61,10 @@ const AddFood = (props) => {
       <CustomNavButton text="Vegies and Fruits" title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
       <CustomNavButton text="Fats and Sugars" title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
       <CustomNavButton text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')} />
-      <TouchableOpacity style={styles.submitTouch}>
-        <Text style={styles.submit}>Submit calories</Text>
-      </TouchableOpacity>
+      <CustomSubmit text="Submit"  onPress={() => {navigation.navigate({
+                    name: 'Home',
+                    params : {}, 
+                    merge: true})}}></CustomSubmit>
       </View>
   );
 }
@@ -83,7 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     paddingRight: 20,
-    marginBottom: 30,
+    marginBottom: 10,
     paddingLeft: 20,
     top: 20,
     alignSelf: 'center',
