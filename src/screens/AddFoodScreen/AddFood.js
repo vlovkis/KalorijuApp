@@ -11,14 +11,30 @@ import FatsAndSugar from '../FatsAndSugarScreen'
 import FruitsAndVeg from '../FruitsAndVegScreen'
 import Fruit from '../FruitScreen'
 
-const AddFood = (props) => {
 
+ 
+
+const AddFood = (props) => {
   const Stack = createNativeStackNavigator();
 
-  function MainScreen({navigation}) {
+  function MainScreen({navigation, route}) { 
+    
+    const [kcalsTotal, setkcalsTotal] = useState(null);
+    useEffect(() => {
+      if (route.params?.kcals) {
+        console.log('Sent Successfully');
+        
+      }
+     }, [route.params?.kcals]);
+
+     alert([route.params?.kcals]);
+     // Reikia kažkokiais būdais sugalvot kaip reikia sumuot ateinančias kalorijas.
+     // Tada reiks sukurt mygtuką su onclick kuris submitina susumuotas kalorijas ir siunčia į homescreeną.
+     // [route.params?.kcals] paima atsiūstus duomenis, bet ištrina praeitą portionSize jei pasirenki naują.
     return (
       <View style={styles.root}>
       <Text style={styles.title}>Pick a food type</Text>
+      <Text style={styles.text}>Turimos kcal</Text>
       <CustomNavButton text="Cereal" title = "Cereal" onPress={() => navigation.navigate('Cereal')}>
         <Text style={styles.name}>Cereal</Text>
       </CustomNavButton>

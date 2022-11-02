@@ -6,14 +6,17 @@ import StatisticsScreen from '../StatisticScreen/Statistic';
 import AddFoodScreen from '../AddFoodScreen/AddFood';
 import ProfileScreen from '../ProfileScreen/Profile';
 import HomeScreen from '../HomeScreen/HomePage';
-
+import { useRoute } from '@react-navigation/native'
 
 const index = () => {
     const Tab = createBottomTabNavigator();
-    
+    const route = useRoute();
+    alert(route.name);
     return (
+        
         <NavigationContainer independent={true} >
             <Tab.Navigator
+            initialRouteName='Home'
              screenOptions={({route}) =>({
                 headerShown: false,
                 tabBarIcon: ({focused, size, color}) => {
@@ -39,7 +42,7 @@ const index = () => {
                 },
              }}
              >
-                <Tab.Screen name= "Home" component={HomeScreen}/>
+                <Tab.Screen name="Home" component={HomeScreen}/>
                 <Tab.Screen name="Statistics" component={StatisticsScreen}/>
                 <Tab.Screen name="Add" component={AddFoodScreen}/>
                 <Tab.Screen name="Profile" component={ProfileScreen}/>
