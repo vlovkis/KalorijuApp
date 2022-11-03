@@ -26,7 +26,9 @@ const AddFood = (props) => {
 
     const calories= route.params?.kcals;
     function onPressHomeSubmit(){
-      navigation.navigate('Home', {calories})
+      navigation.navigate('Home', {
+        kcals : calories,
+      })
 
       Alert.alert('Calorise','Calories added sucessfully',[{text: 'OK', onPress: () => navigation.goBack()}], {cancelable: false});
       
