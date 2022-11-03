@@ -10,34 +10,26 @@ import MeatAndFish from '../MeatAndFishScreen'
 import FatsAndSugar from '../FatsAndSugarScreen'
 import FruitsAndVeg from '../FruitsAndVegScreen'
 import Fruit from '../FruitScreen'
+import HomePage from '../HomeScreen/HomePage';
 import CustomSubmit from '../../components/CustomSubmit';
+import { Alert } from 'react-native';
 
 
  
 
 const AddFood = (props) => {
-  const [totalKcals, setTotalKcals] = useState([]);
+  const [totalKcals, setTotalKcals] = useState(null);
 
   const Stack = createNativeStackNavigator();
-   function onSubmit({navigation, route}) {
-      navigation.navigate('Home');
-    }
+
   function MainScreen({navigation, route}) { 
-   
 
-    const calculate = () => {
-      setTotalKcals(route.params?.kcals + prevKcal);
-    }
-    const prevKcal = usePrevious(route.params?.kcals);
+    const calories= route.params?.kcals;
+    function onPressHomeSubmit(){
+      navigation.navigate('Home', {calories})
 
-    function usePrevious(value) {
-      const ref = useRef();
-
-      useEffect(() => {
-        ref.current = value;
-      },   [value]); // Only re-run if value changes
-      // Return previous value (happens before update in useEffect above)
-      return ref.current;
+      Alert.alert('Calorise','Calories added sucessfully',[{text: 'OK', onPress: () => navigation.goBack()}], {cancelable: false});
+      
     }
 
 
@@ -50,9 +42,7 @@ const AddFood = (props) => {
     return (
       <View style={styles.root}>
       <Text style={styles.title}>Pick a food type</Text>
-            <Text>Previous: {prevKcal}</Text>
-            <Text>Current: {route.params?.kcals}</Text>
-            <Text>Total: {totalKcals}</Text>
+            <Text>Current: {calories}</Text>
       <CustomNavButton text="Cereal" title = "Cereal" onPress={() => navigation.navigate('Cereal')}>
         <Text style={styles.name}>Cereal</Text>
       </CustomNavButton>
@@ -61,10 +51,7 @@ const AddFood = (props) => {
       <CustomNavButton text="Vegies and Fruits" title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
       <CustomNavButton text="Fats and Sugars" title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
       <CustomNavButton text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')} />
-      <CustomSubmit text="Submit"  onPress={() => {navigation.navigate({
-                    name: 'Home',
-                    params : {}, 
-                    merge: true})}}></CustomSubmit>
+      <CustomSubmit text="Submit"  onPress={onPressHomeSubmit}></CustomSubmit>
       </View>
   );
 }
@@ -81,6 +68,7 @@ const AddFood = (props) => {
       <Stack.Screen name = 'FruitsAndVeg' component={FruitsAndVeg} />
       <Stack.Screen name = 'FatsAndSugar' component={FatsAndSugar} />
       <Stack.Screen name = 'Fruit' component={Fruit} />
+      <Stack.Screen name = 'Home' component={HomePage} />
       </Stack.Navigator>
       </NavigationContainer>
     

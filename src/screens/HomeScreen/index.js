@@ -6,11 +6,12 @@ import StatisticsScreen from '../StatisticScreen/Statistic';
 import AddFoodScreen from '../AddFoodScreen/AddFood';
 import ProfileScreen from '../ProfileScreen/Profile';
 import HomeScreen from '../HomeScreen/HomePage';
-import { useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native';
 
 const index = () => {
     const Tab = createBottomTabNavigator();
     const route = useRoute();
+   
     return (
         
         <NavigationContainer independent={true} >
@@ -18,7 +19,7 @@ const index = () => {
             initialRouteName='Home'
              screenOptions={({route}) =>({
                 headerShown: false,
-                tabBarIcon: ({focused, size, color}) => {
+                tabBarIcon: ({focused, size, color, display}) => {
                     let iconName;
                     if(route.name === 'Home'){
                         iconName = focused ? 'ios-home' : 'ios-home-outline';
@@ -26,6 +27,7 @@ const index = () => {
                         iconName = focused ? 'stats-chart' : 'stats-chart-outline';
                     }else if(route.name === 'Add') {
                         iconName = focused ? 'add-circle' : 'add-circle-outline';
+                        display: "none";
                     }else if(route.name === 'Profile') {
                         iconName = focused ? 'settings' : 'settings-outline';
                     }
@@ -40,6 +42,8 @@ const index = () => {
                     
                 },
              }}
+
+             
              >
                 <Tab.Screen name="Home" component={HomeScreen}/>
                 <Tab.Screen name="Statistics" component={StatisticsScreen}/>
