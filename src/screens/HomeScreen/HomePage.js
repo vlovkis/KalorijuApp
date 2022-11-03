@@ -51,7 +51,7 @@ export default class HomePage extends React.Component {
         },
         error => {
           this.setState({
-            pastStepCount: 'Could not get stepCount: ' + error,
+            pastStepCount:'',
           });
         }
       );

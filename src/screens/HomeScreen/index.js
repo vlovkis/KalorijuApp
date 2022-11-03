@@ -11,7 +11,6 @@ import { useRoute } from '@react-navigation/native'
 const index = () => {
     const Tab = createBottomTabNavigator();
     const route = useRoute();
-    alert(route.name);
     return (
         
         <NavigationContainer independent={true} >
