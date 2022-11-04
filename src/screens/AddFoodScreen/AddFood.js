@@ -19,18 +19,17 @@ import { Alert } from 'react-native';
 
 const AddFood = (props) => {
   const [totalKcals, setTotalKcals] = useState(null);
-
+  
   const Stack = createNativeStackNavigator();
 
   function MainScreen({navigation, route}) { 
-
     const calories= route.params?.kcals;
+    
     function onPressHomeSubmit(){
-      navigation.navigate('Home', {
-        kcals : calories,
-      })
-
-      Alert.alert('Calorise','Calories added sucessfully',[{text: 'OK', onPress: () => navigation.goBack()}], {cancelable: false});
+      
+     props.navigation.navigate('Home',{kcals: calories})
+      console.log(route.params.kcals)
+      Alert.alert('Calorise',"Calories added");
       
     }
 
@@ -52,8 +51,8 @@ const AddFood = (props) => {
       <CustomNavButton text="Meat and fish" title = 'Meat and Fish' onPress={() => navigation.navigate('MeatAndFish')} />
       <CustomNavButton text="Vegies and Fruits" title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
       <CustomNavButton text="Fats and Sugars" title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
-      <CustomNavButton text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')} />
-      <CustomSubmit text="Submit"  onPress={onPressHomeSubmit}></CustomSubmit>
+      <CustomNavButton text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')}/>
+      <CustomSubmit text="Submit"  onPress={onPressHomeSubmit} ></CustomSubmit>
       </View>
   );
 }

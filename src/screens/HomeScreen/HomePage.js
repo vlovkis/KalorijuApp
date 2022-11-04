@@ -1,12 +1,12 @@
 import React from "react";
-import {View, Text} from 'react-native';
+import {View, Text, useRoute} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Pedometer } from 'expo-sensors';
 import Ionic from 'react-native-vector-icons/Ionicons';
 
 
+
 export default class HomePage extends React.Component {
-    
     
 
     state = {
@@ -62,10 +62,12 @@ export default class HomePage extends React.Component {
       this._subscription && this._subscription.remove();
       this._subscription = null;
     };
+
     
-    render(navigation) {
-      
- 
+    render() {
+      const {route} = this.props;
+        const calories = route.params?.kcals;
+        
 
       return (
         <View style={{ alignSelf:'center', top:180}}>
@@ -74,7 +76,7 @@ export default class HomePage extends React.Component {
           <Text style={{ alignSelf:'center', top:220, fontWeight:'bold' }}>kcal</Text>
           <Text style={{ alignSelf:'center', top:235, }}><Ionic name="walk"/>{this.state.pastStepCount} | <Ionic name="flame"/>kcal</Text>
           <CircularProgress
-                value={1} //CIA BUS IRASOMAS SUNAUDOTAS KALORIJU VALUE
+                value={calories} //CIA BUS IRASOMAS SUNAUDOTAS KALORIJU VALUE
                 maxValue={2250} 
                 radius={150}
                 progressValueColor={'black'}
