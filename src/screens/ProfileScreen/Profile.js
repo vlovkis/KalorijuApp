@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Auth} from 'aws-amplify';
-    
-
-    
+import CustomSignOut from '../../components/CustomSignOut';
+import CustomButton from '../../components/CustomButton';
+import CustomInput from '../../components/CustomInput';
+import { Input } from '@rneui/base';
+import { ScrollView } from 'react-native-gesture-handler';
 const Profile = () => {
    
+
+
     const signOut = () => {
         Auth.signOut();
     };
@@ -15,17 +19,27 @@ const Profile = () => {
 
     return (
         
-        <View>
-        <Text style={{ fontSize: 24, alignSelf:'center', top:100}}>User profile</Text>
+        <View style={{flex:1, height: 100,}}>
+        <Text style={styles.title}>Profile</Text>
+        <Text style={styles.username}>xXSlayerGamerXx</Text>
+        <Text style={styles.component}>Full name</Text>
+        <Text style={styles.data}>Jeff Bezos</Text>
+        <Text style={styles.input}>___________________________________________</Text>
+        <Text style={styles.component}>Age</Text>
+        <Text style={styles.data}>21</Text>
+        <Text style={styles.input}>___________________________________________</Text>
+        <Text style={styles.component}>Height (cm)</Text>
+        <Text style={styles.data}>68</Text>
+        <Text style={styles.input}>___________________________________________</Text>
+        <Text style={styles.component}>Weight (kg) </Text>
+        <Text style={styles.data}>360</Text>
+        <Text style={styles.input}>___________________________________________</Text>
+        <Text style={styles.component}>Weight Goal (kg)</Text>
+        <Text style={styles.data}>420</Text>
+        <Text style={styles.input}>___________________________________________</Text>
 
-
-
-
-        <TouchableOpacity style={styles.signOut} onPress={signOut}>
-            <Text style={styles.signOutText}>
-            Sign Out
-            </Text>
-        </TouchableOpacity>
+        <CustomSignOut text="Sign Out" onPress={signOut}></CustomSignOut>
+       
         </View>
 
     )
@@ -35,10 +49,51 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
     },
+
+    title:{
+        fontSize: 30,
+        fontWeight: "bold",
+        marginBottom: 40,
+        top: 60,
+        alignSelf: 'center',
+        
+    },
+    data:{
+        fontWeight: 'bold',
+        paddingLeft: 55,
+        top: 40,
+        fontSize: 19,
+    },
+    input:{
+        top: 30,
+        paddingLeft: 50,
+    },
+    component:{
+        color: "#818181",
+        fontWeight: 'bold',
+        paddingBottom: 20,
+        top: 50,
+        paddingLeft: 50,
+
+    },
     signOutText: {
         color: 'white',
         textAlign: 'center',
         fontSize: 20,
+    },
+    username: {
+            backgroundColor: '#FDA23B',
+            top: 45,
+            height: 80,
+            alignSelf: 'center',
+            width: 360,
+            textAlign: 'center',
+            textAlignVertical: 'center',
+            fontSize: 30,
+            fontWeight: 'bold',
+            color: "#fff",
+            borderRadius: 41,
+            marginBottom: 20,
     },
     signOut: {
         width:250,
@@ -46,8 +101,8 @@ const styles = StyleSheet.create({
         alignSelf:'center', 
         backgroundColor: 'red',
         borderColor: 'red',
-        borderRadius: '25px', 
-        top: 650
+        borderRadius: 25, 
+        top: '82%',
     },
     Text:{
         fontSize: 40,
