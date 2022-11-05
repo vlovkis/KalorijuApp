@@ -44,17 +44,18 @@ const SignUpScreen = () => {
              <Text style={styles.title}>Create an account</Text>
              <SafeAreaView style={styles2.root}>
              <CustomInput
-             name="name"
+              style={styles.custom}
+             name="username"
              control={control}
-             placeholder={"Name"}
-             rules={{required: 'Name is required',
+             placeholder={"Username"}
+             rules={{required: 'Username is required',
             minLength: {
                 value: 3,
-                message: 'Name should be at least 3 characters long',
+                message: 'Username should be at least 3 characters long',
             },
             maxLength: {
                 value: 24,
-                message: 'Name should be max 24 characters long',
+                message: 'Username should be max 24 characters long',
             },
             }}
              />
@@ -97,22 +98,7 @@ const SignUpScreen = () => {
              placeholder={"Weight Goal"}
              rules={{required: 'Weight goal is required'}}
              />
-             <CustomInput
-              style={styles.custom}
-             name="username"
-             control={control}
-             placeholder={"Username"}
-             rules={{required: 'Username is required',
-            minLength: {
-                value: 3,
-                message: 'Username should be at least 3 characters long',
-            },
-            maxLength: {
-                value: 24,
-                message: 'Username should be max 24 characters long',
-            },
-            }}
-             />
+          
              <CustomInput
              name="email"
             placeholder={"Email"}

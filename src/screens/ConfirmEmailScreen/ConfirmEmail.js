@@ -92,12 +92,14 @@ const styles = StyleSheet.create({
         paddingRight: 100,
         marginBottom: 30,
         paddingLeft: 20,
+        marginTop: 60,
+    
     },
     link:{
         color:"#FCA13A",
     },
     SignInText:{
-        marginTop: -10,
+        marginTop: 50,
         display: 'flex',
         alignSelf: 'center',
         paddingLeft: 50,
