@@ -13,7 +13,7 @@ const Statistic = () => {
 
 
     return (
-        <View style={{ alignSelf:'center', top:180}}>
+        <View style={{ alignSelf:'center', top:140, width: 350,}}>
 <Text style={{ bottom:100, fontSize: 40, fontWeight:'bold', left: 80}}>STATISTICS</Text>
 
 
@@ -52,7 +52,7 @@ const Statistic = () => {
                 </Text>
               
             </View>
-<View style={{bottom: 30}}>
+<View style={{bottom: 30, paddingLeft: 5,}}>
             <LineChart
     data={{
       labels: ["1st", "2nd", "3rd", "4th", "5th", "6th"],
@@ -64,7 +64,7 @@ const Statistic = () => {
             800,
             600,
             650,
-            420
+            420,
           ]
         }
       ]
@@ -75,9 +75,9 @@ const Statistic = () => {
     yAxisSuffix="kcal"
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
-      backgroundColor: "#F9FBFC",
-      backgroundGradientFrom: "",
-      backgroundGradientTo: "",
+      backgroundColor: "#f2f2f2",
+      backgroundGradientFrom: "#f2f2f2",
+      backgroundGradientTo: "#f2f2f2",
       decimalPlaces: 0, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(207, 112, 29, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(207, 112, 29, ${opacity})`,
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     },
     total:{
     paddingTop: 10,
-    fontSize: 20,
+    fontSize: 18,
     top: 15,
     left: 10
     

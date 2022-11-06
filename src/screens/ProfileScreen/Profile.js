@@ -13,7 +13,7 @@ const Profile = () => {
 
     return (
         
-        <View style={{flex:1, height: 100, top: 20}}>
+        <View style={{flex:1}}>
         <Text style={styles.title}>Profile</Text>
         <Text style={styles.username}>xXSlayerGamerXx</Text>
         <Text style={styles.component}>Full name</Text>
@@ -54,23 +54,20 @@ const styles = StyleSheet.create({
     },
     data:{
         fontWeight: 'bold',
-        paddingLeft: 55,
         top: 40,
-        right:20,
         fontSize: 19,
+        alignSelf: 'center',
     },
     input:{
         top: 30,
-        paddingLeft: 50,
-        right: 20
+        alignSelf:'center',
     },
     component:{
         color: "#818181",
         fontWeight: 'bold',
         paddingBottom: 20,
         top: 50,
-        paddingLeft: 50,
-        right: 20
+        alignSelf:'center',
 
     },
     username: {
