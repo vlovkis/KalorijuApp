@@ -1,25 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import {Auth} from 'aws-amplify';
 import CustomSignOut from '../../components/CustomSignOut';
-import CustomButton from '../../components/CustomButton';
-import CustomInput from '../../components/CustomInput';
-import { Input } from '@rneui/base';
-import { ScrollView } from 'react-native-gesture-handler';
 const Profile = () => {
    
 
 
     const signOut = () => {
         Auth.signOut();
-    };
-
-
+    }
 
 
     return (
         
-        <View style={{flex:1, height: 100,}}>
+        <View style={{flex:1, height: 100, top: 20}}>
         <Text style={styles.title}>Profile</Text>
         <Text style={styles.username}>xXSlayerGamerXx</Text>
         <Text style={styles.component}>Full name</Text>
@@ -51,7 +45,7 @@ const styles = StyleSheet.create({
     },
 
     title:{
-        fontSize: 30,
+        fontSize: 40,
         fontWeight: "bold",
         marginBottom: 40,
         top: 60,
@@ -62,11 +56,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingLeft: 55,
         top: 40,
+        right:20,
         fontSize: 19,
     },
     input:{
         top: 30,
         paddingLeft: 50,
+        right: 20
     },
     component:{
         color: "#818181",
@@ -74,70 +70,24 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         top: 50,
         paddingLeft: 50,
+        right: 20
 
     },
-    signOutText: {
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 20,
-    },
     username: {
-            backgroundColor: '#FDA23B',
             top: 45,
-            height: 80,
+            padding: 20,
             alignSelf: 'center',
             width: 360,
             textAlign: 'center',
             textAlignVertical: 'center',
             fontSize: 30,
             fontWeight: 'bold',
-            color: "#fff",
+            color: "orange",
             borderRadius: 41,
+            borderWidth: 2,
+            borderColor: 'orange',
             marginBottom: 20,
     },
-    signOut: {
-        width:250,
-        padding: 10,
-        alignSelf:'center', 
-        backgroundColor: 'red',
-        borderColor: 'red',
-        borderRadius: 25, 
-        top: '82%',
-    },
-    Text:{
-        fontSize: 40,
-        fontWeight: "bold",
-        paddingRight: 150,
-        marginBottom: 5,
-        paddingLeft: 20,
-        top: 90,
-    },
-    SmallText:{
-        color: '#818181',
-        alignSelf: "stretch",
-        top: 100,
-        paddingLeft: 20,
-    },
-    Inputs:{
-        top:150,
-        left:60
-        },
-    ButtonPlacement:{
-        top: 130,
-        left:5,
-    },
-    Input:{
-        height: 40,
-        backgroundColor: '#fff',
-        marginHorizontal: 7,
-        marginVertical: 5,
-        padding: 5,
-        width: 250,
-        borderRadius: 10,
-    },
-    InputLabel:{
-        left: 10,
-    }
 });
 
 export default Profile

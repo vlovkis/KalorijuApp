@@ -17,13 +17,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         borderRadius: 35,
         alignSelf: 'center',
-        top: 25,
+        top: 50,
         
 
     },
 
     container_PRIMARY: {
-        backgroundColor: 'red',
+        borderColor: 'red',
+        borderWidth: 2
     },
 
     container_TERTIARY: {
@@ -43,8 +44,8 @@ const styles = StyleSheet.create({
     },
 
     text: {alignSelf: 'center',
-    fontSize: 24,
-    color: 'white'},
+    fontSize: 20,
+    color: 'red'},
 
     text_TERTIARY: {
         color: '#FCA13A',

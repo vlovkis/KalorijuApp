@@ -11,9 +11,9 @@ const CustomSubmit = ( {onPress, text, type = "PRIMARY"} ) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 290,
+        width: 145,
         textAlign: 'center',
-        padding:15,
+        padding:10,
         marginTop: 20,
         borderRadius: 35,
         alignSelf: 'center',
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     },
 
     container_PRIMARY: {
-        backgroundColor: 'green',
+        borderColor:'#3e8a3e',
+        borderWidth: 2
     },
 
     container_TERTIARY: {
@@ -42,12 +43,16 @@ const styles = StyleSheet.create({
     },
 
     text: {alignSelf: 'center',
-    fontSize: 24,
-    color: 'white'},
+    fontSize: 20,
+    color: '#3e8a3e'},
 
     text_TERTIARY: {
         color: '#FCA13A',
         fontSize: 10,
+    },
+
+    text_SUBMIT:{
+        fontSize: 20,
     },
 
     text_SIGNUP: {

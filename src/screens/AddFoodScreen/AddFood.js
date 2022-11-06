@@ -43,16 +43,22 @@ const AddFood = (props) => {
     return (
       <View style={styles.root}>
       <Text style={styles.title}>Pick a food type</Text>
-            <Text>Current: {calories}</Text>
-      <CustomNavButton text="Cereal" title = "Cereal" onPress={() => navigation.navigate('Cereal')}>
-        <Text style={styles.name}>Cereal</Text>
-      </CustomNavButton>
-      <CustomNavButton text="Milk and Dairy" title = 'Milk and Dairy' onPress={() => navigation.navigate('MilkAndDairy')} />
-      <CustomNavButton text="Meat and fish" title = 'Meat and Fish' onPress={() => navigation.navigate('MeatAndFish')} />
-      <CustomNavButton text="Vegies and Fruits" title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
-      <CustomNavButton text="Fats and Sugars" title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
-      <CustomNavButton text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')}/>
-      <CustomSubmit text="Submit"  onPress={onPressHomeSubmit} ></CustomSubmit>
+            <Text style={styles.totCal}>Current selected calories: {calories}kcals</Text>
+      <View style={styles.row}>      
+      <CustomNavButton type="ADDFOOD" text="Cereal" title = "Cereal" onPress={() => navigation.navigate('Cereal')} style={styles.button}/>
+      <CustomNavButton type="ADDFOOD" text="Milk and Dairy" title = 'Milk and Dairy' onPress={() => navigation.navigate('MilkAndDairy')} />
+      </View>
+      <View style={styles.row}>
+      <CustomNavButton type="ADDFOOD" text="Meat and fish" title = 'Meat and Fish' onPress={() => navigation.navigate('MeatAndFish')} />
+      <CustomNavButton type="ADDFOOD" text="Vegies and Fruits" title = 'Fruits and Vegetables' onPress={() => navigation.navigate('FruitsAndVeg')} />
+      </View>
+      <View style={styles.row}>
+      <CustomNavButton type="ADDFOOD" text="Fats and Sugars" title = 'Fats and Sugars' onPress={() => navigation.navigate('FatsAndSugar')} />
+      <CustomNavButton type="ADDFOOD" text="Fruit" title = 'Fruit' onPress={() => navigation.navigate('Fruit')}/>
+      </View>
+      <View style={{top:60}}>
+      <CustomSubmit text="Submit" onPress={onPressHomeSubmit} />
+      </View>
       </View>
   );
 }
@@ -81,11 +87,17 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     paddingRight: 20,
-    marginBottom: 10,
     paddingLeft: 20,
-    top: 20,
+    top: 40,
     alignSelf: 'center',
 
+  },
+  totCal:{
+    top:"120%",
+    alignSelf:'center',
+    fontSize:25,
+    fontWeight: "bold",
+    textAlign: "center"
   },
   text: {
     top: "83%",
@@ -114,11 +126,11 @@ const styles = StyleSheet.create({
 
   },
   row:{ 
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     padding: 5,
     borderRadius: 20,
-    top:"30%",
+    top:"15%",
   },
   touch:{
     borderRadius: 20,

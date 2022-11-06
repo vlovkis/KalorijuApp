@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Pressable } from 'react-native';
 import {View, Text, TouchableOpacity, StyleSheet, UseState, Dimensions} from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
+import Ionic from 'react-native-vector-icons/Ionicons';
 
 
 const Statistic = () => {
 
-
+  function Alert(){
+    alert("Not enough info about calories")
+  }
 
 
     return (
@@ -36,10 +39,23 @@ const Statistic = () => {
                 </Text>
             </TouchableOpacity >
             </View>
+
+            <View style={styles.selectMonthAndDay}>
+                <Text style={styles.month}>
+                 <TouchableOpacity onPress={Alert}><Ionic name="arrow-back-outline" style={styles.arrows}/></TouchableOpacity> November <TouchableOpacity onPress={Alert}><Ionic name="arrow-forward-outline" style={styles.arrows}/></TouchableOpacity>
+                </Text>
+              
+            </View>
+            <View style={styles.selectMonthAndDay}>
+                <Text style={styles.month}>
+                 <TouchableOpacity onPress={Alert}><Ionic name="arrow-back-outline" style={styles.arrows}/></TouchableOpacity> 1-6 <TouchableOpacity onPress={Alert}><Ionic name="arrow-forward-outline" style={styles.arrows}/></TouchableOpacity>
+                </Text>
+              
+            </View>
 <View style={{bottom: 30}}>
             <LineChart
     data={{
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      labels: ["1st", "2nd", "3rd", "4th", "5th", "6th"],
       datasets: [
         {
           data: [
@@ -77,13 +93,15 @@ const Statistic = () => {
     }}
     bezier
     style={{
-      marginVertical: 8,
+      marginVertical: 0,
       borderRadius: 16
     }}
   />
 </View>
     <View style={styles.overview}>
-      
+      <Text style={styles.total}>Total calories burned:</Text><Text style={styles.number}>6420</Text><View style={styles.hairline} />
+      <Text style={styles.total}>Total calories gained:</Text><Text style={styles.number}>3795</Text><View style={styles.hairline} />
+      <Text style={styles.total}>Total calories (excl. everything):</Text><Text style={styles.number}>15672</Text><View style={styles.hairline} />
     </View>
         </View>
 
@@ -98,6 +116,32 @@ const styles = StyleSheet.create({
       padding: 5,
       bottom: 80,
       left: 70
+    },
+    selectMonthAndDay:{
+      bottom: 80,
+      alignSelf: "center",
+    },
+    month:{
+      color: "#818181"
+    },
+    total:{
+    paddingTop: 10,
+    fontSize: 20,
+    top: 15,
+    left: 10
+    
+    },
+    number:{
+      alignSelf: "flex-end",
+      bottom: 10,
+      fontSize: 20,
+      right: 10,
+      fontWeight: 'bold'
+    },
+    hairline: {
+      backgroundColor: 'orange',
+      height: 2,
+      width: "100%"
     },
     touch:{
       margin: 5,
@@ -119,6 +163,10 @@ const styles = StyleSheet.create({
       color:"orange",
   
       
+    },
+    arrows:{
+      color:"#818181",
+      top:2
     },
   });
 

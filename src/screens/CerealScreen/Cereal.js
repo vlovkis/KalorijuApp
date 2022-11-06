@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import {View, Text, Button, StyleSheet, SafeAreaView, Image, FlatList, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView, Image, FlatList, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import Ionic from 'react-native-vector-icons/Ionicons';
-import { useRoute } from "@react-navigation/native";
 
 
 //Bagel foto

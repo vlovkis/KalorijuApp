@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FCA13A',
     },
 
+    container_ADDFOOD: {
+        backgroundColor: '#FCA13A',
+        width: "40%"
+    },
+
     container_TERTIARY: {
         width: 200,
         marginTop: 0,
@@ -48,6 +53,10 @@ const styles = StyleSheet.create({
     text_TERTIARY: {
         color: '#FCA13A',
         fontSize: 10,
+    },
+
+    text_ADDFOOD:{
+        fontSize: 15
     },
 
     text_SIGNUP: {

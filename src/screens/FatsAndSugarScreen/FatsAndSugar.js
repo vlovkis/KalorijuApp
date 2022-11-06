@@ -76,6 +76,7 @@ const Item = ({ item, onPress, backgroundColor, textColor}) => (
 const FatsAndSugar = () => {
 
     const [selectedId, setSelectedId] = useState(null);
+    const [selectedPortion, setSelectedPortion] = useState(null);
 
 const renderItem =({item}) => {
     const backgroundColor = item.id === selectedId ? "orange" : "#fff";
@@ -85,7 +86,8 @@ const renderItem =({item}) => {
     return(
     <Item
      item={item}
-     onPress={()=> setSelectedId(item.id)}
+     onPress={()=> {setSelectedId(item.id)
+        setSelectedPortion(item.portionSize)}}
      backgroundColor={{backgroundColor}}
      textColor={{color}}
      />
@@ -100,7 +102,12 @@ const navigation = useNavigation();
 
         <View>
                 <Ionic name="arrow-back" onPress={() => navigation.goBack()} style={{fontSize: 30, bottom:110, left: 20, paddingTop: 180}}/>
-                <Ionic name="checkmark" style={{fontSize: 40, position: "absolute", left: "80%", top:75, color: "green"}}/>
+                <Ionic name="checkmark" style={{fontSize: 40, position: "absolute", left: "80%", top:75, color: "green"}}
+                onPress={() => {navigation.navigate({
+                    name: 'Main',
+                    params : {kcals: selectedPortion}, 
+                    merge: true})}}
+                />
                 <Text style={styles.mainText}>Fats and Sugars</Text>
 
                 <SafeAreaView style={styles.container}>
