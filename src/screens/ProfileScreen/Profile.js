@@ -15,21 +15,21 @@ const Profile = () => {
         
         <View style={{flex:1}}>
         <Text style={styles.title}>Profile</Text>
-        <Text style={styles.username}>xXSlayerGamerXx</Text>
+        <Text style={styles.username}>Deividas123</Text>
         <Text style={styles.component}>Full name</Text>
-        <Text style={styles.data}>Jeff Bezos</Text>
+        <Text style={styles.data}>Deividas Bružas</Text>
         <Text style={styles.input}>___________________________________________</Text>
         <Text style={styles.component}>Age</Text>
-        <Text style={styles.data}>21</Text>
+        <Text style={styles.data}>20</Text>
         <Text style={styles.input}>___________________________________________</Text>
         <Text style={styles.component}>Height (cm)</Text>
-        <Text style={styles.data}>68</Text>
+        <Text style={styles.data}>184</Text>
         <Text style={styles.input}>___________________________________________</Text>
         <Text style={styles.component}>Weight (kg) </Text>
-        <Text style={styles.data}>360</Text>
+        <Text style={styles.data}>69</Text>
         <Text style={styles.input}>___________________________________________</Text>
         <Text style={styles.component}>Weight Goal (kg)</Text>
-        <Text style={styles.data}>420</Text>
+        <Text style={styles.data}>65</Text>
         <Text style={styles.input}>___________________________________________</Text>
 
         <CustomSignOut text="Sign Out" onPress={signOut}></CustomSignOut>
