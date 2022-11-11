@@ -5,7 +5,6 @@ import { Pedometer } from 'expo-sensors';
 import Ionic from 'react-native-vector-icons/Ionicons';
 
 
-
 export default class HomePage extends React.Component {
     
 
@@ -62,12 +61,10 @@ export default class HomePage extends React.Component {
       this._subscription && this._subscription.remove();
       this._subscription = null;
     };
-
     
     render() {
       const {route} = this.props;
-        const calories = route.params?.kcals;
-        
+       const calories = isNaN(route.params?.kcals) ? 0 : route.params?.kcals;
 
       return (
         <View style={{ alignSelf:'center', top:180}}>

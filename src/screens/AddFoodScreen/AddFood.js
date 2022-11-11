@@ -13,22 +13,25 @@ import Fruit from '../FruitScreen'
 import HomePage from '../HomeScreen/HomePage';
 import CustomSubmit from '../../components/CustomSubmit';
 import { Alert } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
  
 
 const AddFood = (props) => {
-  const [totalKcals, setTotalKcals] = useState(null);
   
   const Stack = createNativeStackNavigator();
 
   function MainScreen({navigation, route}) { 
+
     const calories= route.params?.kcals;
-    
-    function onPressHomeSubmit(){
-      
-     props.navigation.navigate('Home',{kcals: calories})
-      console.log(route.params.kcals)
+    let ref = useRef();
+    ref.current = isNaN(ref.current) ? calories : ref.current + calories;
+
+
+    function onPressHomeSubmit() {
+      props.navigation.navigate('Home',{kcals: ref.current})
+      console.log(ref.current)
       Alert.alert('Calorise',"Calories added");
       
     }

@@ -5,12 +5,11 @@ import { LineChart } from 'react-native-chart-kit';
 import Ionic from 'react-native-vector-icons/Ionicons';
 
 
-const Statistic = () => {
+const Statistic = (route, props) => {
 
   function Alert(){
     alert("Not enough info about calories")
   }
-
 
     return (
         <View style={{ alignSelf:'center', top:140, width: 350,}}>
@@ -48,23 +47,23 @@ const Statistic = () => {
             </View>
             <View style={styles.selectMonthAndDay}>
                 <Text style={styles.month}>
-                 <TouchableOpacity onPress={Alert}><Ionic name="arrow-back-outline" style={styles.arrows}/></TouchableOpacity> 1-6 <TouchableOpacity onPress={Alert}><Ionic name="arrow-forward-outline" style={styles.arrows}/></TouchableOpacity>
+                 <TouchableOpacity onPress={Alert}><Ionic name="arrow-back-outline" style={styles.arrows}/></TouchableOpacity> 21-26 <TouchableOpacity onPress={Alert}><Ionic name="arrow-forward-outline" style={styles.arrows}/></TouchableOpacity>
                 </Text>
               
             </View>
 <View style={{bottom: 30, paddingLeft: 5,}}>
             <LineChart
     data={{
-      labels: ["1st", "2nd", "3rd", "4th", "5th", "6th"],
+      labels: ["21st", "22nd", "23rd", "24th", "25th", "26th"],
       datasets: [
         {
           data: [
-            600,
-            700,
-            800,
-            600,
-            650,
-            420,
+            240,
+            0,
+            0,
+            0,
+            0,
+            0,
           ]
         }
       ]
@@ -99,9 +98,9 @@ const Statistic = () => {
   />
 </View>
     <View style={styles.overview}>
-      <Text style={styles.total}>Total calories burned:</Text><Text style={styles.number}>6420</Text><View style={styles.hairline} />
-      <Text style={styles.total}>Total calories gained:</Text><Text style={styles.number}>3795</Text><View style={styles.hairline} />
-      <Text style={styles.total}>Total calories (excl. everything):</Text><Text style={styles.number}>15672</Text><View style={styles.hairline} />
+      <Text style={styles.total}>Total calories burned:</Text><Text style={styles.number}>0</Text><View style={styles.hairline} />
+      <Text style={styles.total}>Total calories gained:</Text><Text style={styles.number}>140</Text><View style={styles.hairline} />
+      <Text style={styles.total}>Total calories (excl. everything):</Text><Text style={styles.number}>140</Text><View style={styles.hairline} />
     </View>
         </View>
 
